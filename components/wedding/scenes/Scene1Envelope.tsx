@@ -18,7 +18,7 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
     setIsMounted(true);
   }, []);
 
-  const handleEnvelopeClick = (e: React.MouseEvent | React.TouchEvent) => {
+  const handleCardClick = (e: React.MouseEvent | React.TouchEvent) => {
     e.stopPropagation(); // Prevent event bubbling to parent container
     
     if (isProcessing || isOpened) return; // Prevent double clicks
@@ -26,9 +26,10 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
     setIsProcessing(true);
     setIsOpened(true);
     
+    // Proceed to next scene after opening animation completes
     setTimeout(() => {
       onNext();
-    }, 2000);
+    }, 3000);
   };
 
   // Generate consistent positions for petals
@@ -72,84 +73,91 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
       {/* Main content */}
       <div className="flex flex-col items-center justify-center h-full px-8 text-center">
         {!isOpened ? (
+          /* Closed Invitation Card */
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 0.8, opacity: 0, rotateY: 0 }}
+            animate={{ scale: 1, opacity: 1, rotateY: 0 }}
             transition={{ duration: 1, ease: 'easeOut' }}
-            className="flex flex-col items-center"
+            className="relative cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={handleCardClick}
+            onTouchEnd={handleCardClick}
+            style={{ perspective: '1000px' }}
           >
-            {/* Envelope */}
+            {/* Invitation Card - Closed State */}
             <motion.div
-              className="relative cursor-pointer mb-8"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleEnvelopeClick}
-              onTouchEnd={handleEnvelopeClick}
+              className="w-80 h-96 bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-2xl relative overflow-hidden border border-gray-200"
+              animate={isOpened ? { rotateY: -180 } : { rotateY: 0 }}
+              transition={{ duration: 1.5, ease: 'easeInOut' }}
+              style={{ transformStyle: 'preserve-3d' }}
             >
-              <div className="w-64 h-40 bg-white rounded-lg shadow-2xl relative overflow-hidden">
-                {/* Envelope flap */}
-                <motion.div
-                  className="absolute top-0 left-0 w-full h-20 bg-silver origin-bottom"
-                  style={{
-                    clipPath: 'polygon(0 0, 50% 100%, 100% 0)',
-                  }}
-                  animate={isOpened ? { rotateX: 180 } : { rotateX: 0 }}
-                  transition={{ duration: 0.8, ease: 'easeInOut' }}
-                />
-                {/* Envelope body */}
-                <div className="absolute bottom-0 left-0 w-full h-32 bg-white" />
+              {/* Front of the card */}
+              <div className="absolute inset-0 backface-hidden">
+                {/* Decorative border */}
+                <div className="absolute inset-4 border-2 border-dusty-blue/30 rounded-lg">
+                  <div className="absolute inset-2 border border-dusty-blue/20 rounded-lg"></div>
+                </div>
                 
-                {/* Wax seal */}
-                <motion.div
-                  className="absolute top-8 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-dusty-blue rounded-full flex items-center justify-center text-white text-xs font-script"
-                  animate={isOpened ? { scale: 0, opacity: 0 } : { scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
-                  K💍N
-                </motion.div>
-              </div>
-            </motion.div>
-
-            {/* Invitation text */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-white"
-            >
-              <p className="typography-body mb-4">Tap to open the invitation</p>
-              <p className="typography-caption mb-6 opacity-90">You are invited to celebrate the union of</p>
-              
-              <div className="space-y-2">
-                <h1 className="typography-romantic text-4xl text-white mb-2">
-                  Koketso Morapedi
-                </h1>
-                <div className="typography-romantic text-2xl text-white/80 mb-2">&</div>
-                <h1 className="typography-romantic text-4xl text-white mb-6">
-                  Neo Letsholathebe
-                </h1>
-              </div>
-
-              <div className="space-y-1">
-                <p className="typography-formal text-xl font-medium">06 December 2025</p>
-                <p className="typography-formal opacity-90">Letsholathebe, Botswana</p>
+                {/* Card content */}
+                <div className="flex flex-col items-center justify-center h-full p-8 text-dusty-blue">
+                  {/* Decorative flourish */}
+                  <motion.div
+                    className="text-4xl mb-6 text-dusty-blue/60"
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    ✨
+                  </motion.div>
+                  
+                  <h1 className="typography-romantic text-3xl text-center mb-4 text-dusty-blue">
+                    Wedding Invitation
+                  </h1>
+                  
+                  <div className="w-16 h-px bg-dusty-blue/40 mb-6"></div>
+                  
+                  <p className="typography-body text-lg text-center mb-6 text-dusty-blue/80">
+                    You are cordially invited to celebrate
+                  </p>
+                  
+                  <div className="text-center space-y-2">
+                    <h2 className="typography-romantic text-2xl text-dusty-blue">
+                      Koketso & Neo
+                    </h2>
+                    <p className="typography-formal text-dusty-blue/70">
+                      06 December 2025
+                    </p>
+                  </div>
+                  
+                  <motion.div
+                    className="mt-8 text-dusty-blue/60 text-sm"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    Tap to open
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
         ) : (
+          /* Opening Animation */
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1, ease: 'easeOut' }}
             className="text-center text-white"
           >
-            {/* Opened envelope animation */}
+            {/* Opening animation with sparkles */}
             <motion.div
               className="text-6xl mb-8"
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 0.5, repeat: 2 }}
+              animate={{ 
+                scale: [1, 1.2, 1],
+                rotate: [0, 10, -10, 0] 
+              }}
+              transition={{ duration: 0.8, repeat: 3 }}
             >
-              💌
+              💖
             </motion.div>
             
             <motion.div
@@ -160,6 +168,35 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
               <h2 className="typography-heading text-3xl mb-4">Welcome to our story...</h2>
               <p className="typography-body opacity-90">Let love unfold</p>
             </motion.div>
+            
+            {/* Sparkle effects */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute text-2xl"
+                  initial={{ 
+                    x: 200, 
+                    y: 200, 
+                    scale: 0, 
+                    opacity: 0 
+                  }}
+                  animate={{ 
+                    x: 200 + (Math.cos(i * 45 * Math.PI / 180) * 150),
+                    y: 200 + (Math.sin(i * 45 * Math.PI / 180) * 150),
+                    scale: [0, 1, 0],
+                    opacity: [0, 1, 0]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    delay: 0.5 + (i * 0.1),
+                    ease: 'easeOut'
+                  }}
+                >
+                  ✨
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         )}
       </div>

@@ -183,4 +183,9 @@
   .typography-button {
     @apply font-body font-medium;
   }
+  
+  /* 3D Transform utilities */
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
 }
