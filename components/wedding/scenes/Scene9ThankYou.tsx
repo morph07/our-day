@@ -12,9 +12,11 @@ interface SceneProps {
 export default function Scene9ThankYou({ isActive }: SceneProps) {
   const shareOnWhatsApp = () => {
     const message = encodeURIComponent(
-      "You're invited to Koketso & Neo's wedding! 💙\n06 December 2025 • Letsholathebe, Botswana\n\nView their beautiful invitation: " + window.location.href
+      "You're invited to Koketso & Neo's wedding! 💙\n06 December 2025 • Letsholathebe, Botswana\n\nView their beautiful invitation: " + (typeof window !== 'undefined' ? window.location.href : '')
     );
-    window.open(`https://wa.me/?text=${message}`, '_blank');
+    if (typeof window !== 'undefined') {
+      window.open(`https://wa.me/?text=${message}`, '_blank');
+    }
   };
 
   const addToCalendar = () => {

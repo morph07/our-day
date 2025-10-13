@@ -112,13 +112,13 @@ export default function Scene7RSVP({ isActive }: SceneProps) {
                 key={i}
                 className="absolute w-2 h-2 bg-dusty-blue rounded-full"
                 initial={{
-                  x: window.innerWidth / 2,
-                  y: window.innerHeight / 2,
+                  x: (typeof window !== 'undefined' ? window.innerWidth : 400) / 2,
+                  y: (typeof window !== 'undefined' ? window.innerHeight : 800) / 2,
                   scale: 0,
                 }}
                 animate={{
-                  x: Math.random() * window.innerWidth,
-                  y: Math.random() * window.innerHeight,
+                  x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 400),
+                  y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
                   scale: [0, 1, 0],
                 }}
                 transition={{

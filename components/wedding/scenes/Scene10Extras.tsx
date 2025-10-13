@@ -12,7 +12,9 @@ interface SceneProps {
 export default function Scene10Extras({ isActive }: SceneProps) {
   const replayStory = () => {
     // This will be handled by the parent WeddingStory component
-    window.location.reload();
+    if (typeof window !== 'undefined') {
+      window.location.reload();
+    }
   };
 
   // Placeholder engagement photos - in production, these would be real photos

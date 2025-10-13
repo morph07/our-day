@@ -137,7 +137,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   const handleTouchEnd = (e: React.TouchEvent) => {
     const touchDuration = Date.now() - touchStartRef.current;
     const touch = e.changedTouches[0];
-    const screenWidth = window.innerWidth;
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400;
     const tapX = touch.clientX;
 
     if (touchDuration < 200) { // Quick tap

@@ -28,14 +28,14 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
             key={i}
             className="absolute w-2 h-2 bg-white/20 rounded-full"
             initial={{
-              x: Math.random() * window.innerWidth,
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 400),
               y: -10,
               rotate: 0,
             }}
             animate={{
-              y: window.innerHeight + 10,
+              y: (typeof window !== 'undefined' ? window.innerHeight : 800) + 10,
               rotate: 360,
-              x: Math.random() * window.innerWidth,
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 400),
             }}
             transition={{
               duration: Math.random() * 3 + 4,

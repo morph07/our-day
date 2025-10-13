@@ -93,8 +93,8 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
               key={i}
               className="absolute text-dusty-blue/20 text-2xl"
               initial={{
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 400),
+                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
                 rotate: 0,
               }}
               animate={{

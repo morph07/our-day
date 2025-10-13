@@ -13,7 +13,9 @@ export default function Scene4Venue({ isActive }: SceneProps) {
   const openInMaps = () => {
     // Coordinates for Letsholathebe, Botswana (approximate)
     const mapsUrl = 'https://maps.google.com/?q=Letsholathebe,Botswana';
-    window.open(mapsUrl, '_blank');
+    if (typeof window !== 'undefined') {
+      window.open(mapsUrl, '_blank');
+    }
   };
 
   return (

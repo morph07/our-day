@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: "Join us for our special day of love and celebration in Letsholathebe, Botswana. Interactive wedding invitation with all the details you need.",
   keywords: ["wedding", "invitation", "Koketso", "Neo", "Botswana", "Letsholathebe", "December 2025"],
   authors: [{ name: "Koketso & Neo" }],
+  metadataBase: new URL('https://koketso-neo-wedding.netlify.app'),
   openGraph: {
     title: "Koketso 💙 Neo - Wedding Invitation",
     description: "You're invited to celebrate our union on 06 December 2025 in Letsholathebe, Botswana",
@@ -35,8 +36,13 @@ export const metadata: Metadata = {
     title: "Koketso 💙 Neo - Wedding Invitation",
     description: "Join us for our special day - 06 December 2025",
   },
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  themeColor: "#A3BFD9",
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '#A3BFD9',
 };
 
 export default function RootLayout({
