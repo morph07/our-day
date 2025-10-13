@@ -36,20 +36,28 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
 
 
   return (
-    <div className="relative w-full h-full bg-gradient-to-br from-rose-50 via-pink-50 to-purple-100 overflow-hidden">
+    <div className="relative w-full h-full bg-gradient-to-b from-white to-beige overflow-hidden">
+      {/* Watercolor border effect (consistent with other scenes) */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-dusty-blue/10 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-dusty-blue/10 to-transparent" />
+        <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-dusty-blue/10 to-transparent" />
+        <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-dusty-blue/10 to-transparent" />
+      </div>
+
       <div className="flex flex-col items-center justify-center min-h-full px-6 py-8 text-center relative z-10">
         <AnimatePresence mode="wait">
           {!isSubmitted ? (
             <motion.div
               key="form"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
               className="max-w-lg w-full"
             >
               <div 
-                className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-purple-200"
+                className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-dusty-blue/20"
                 onClick={(e) => e.stopPropagation()}
                 onTouchStart={(e) => e.stopPropagation()}
                 onTouchEnd={(e) => e.stopPropagation()}
@@ -57,17 +65,24 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                 onMouseUp={(e) => e.stopPropagation()}
               >
                 <div className="text-center mb-8">
-                  <div className="text-5xl mb-4">💌</div>
-                  <h3 className="typography-hero text-3xl text-purple-700 mb-2">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="text-4xl mb-4"
+                  >
+                    💌
+                  </motion.div>
+                  <h3 className="typography-heading text-dusty-blue mb-2">
                     Please RSVP
                   </h3>
-                  <div className="w-20 h-1 bg-purple-400 mx-auto rounded-full mb-4" />
-                  <p className="typography-caption text-gray-600">
+                  <div className="w-16 h-px bg-dusty-blue mx-auto mb-4" />
+                  <p className="typography-body text-gray-600">
                     Your presence would make our special day complete
                   </p>
-                  <div className="bg-purple-50 rounded-xl p-4 mt-4">
-                    <p className="typography-caption text-xs text-purple-700 font-medium">
-                      Please respond by 15 November 2025
+                  <div className="bg-dusty-blue/10 rounded-xl p-4 mt-4">
+                    <p className="typography-caption text-dusty-blue font-medium">
+                      Please respond by 01 December 2025
                     </p>
                   </div>
                 </div>
@@ -80,9 +95,13 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                   onTouchEnd={(e) => e.stopPropagation()}
                 >
                   {/* Name */}
-                  <div>
-                    <label className="flex items-center text-sm typography-caption text-gray-700 mb-2">
-                      <User size={16} className="mr-2 text-purple-600" />
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
+                    <label className="flex items-center typography-caption text-gray-700 mb-2">
+                      <User size={16} className="mr-2 text-dusty-blue" />
                       Full Name *
                     </label>
                     <input
@@ -91,15 +110,19 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all typography-caption"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-dusty-blue/20 focus:border-dusty-blue focus:ring-2 focus:ring-dusty-blue/20 outline-none transition-all typography-body bg-white/80"
                       placeholder="Enter your full name"
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Phone Number */}
-                  <div>
-                    <label className="flex items-center text-sm typography-caption text-gray-700 mb-2">
-                      <Phone size={16} className="mr-2 text-purple-600" />
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                  >
+                    <label className="flex items-center typography-caption text-gray-700 mb-2">
+                      <Phone size={16} className="mr-2 text-dusty-blue" />
                       Phone Number *
                     </label>
                     <input
@@ -108,18 +131,22 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                       required
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all typography-caption"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-dusty-blue/20 focus:border-dusty-blue focus:ring-2 focus:ring-dusty-blue/20 outline-none transition-all typography-body bg-white/80"
                       placeholder="Enter your phone number"
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Attendance */}
-                  <div>
-                    <label className="block text-sm typography-caption text-gray-700 mb-3">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                  >
+                    <label className="block typography-caption text-gray-700 mb-3">
                       Will you be attending? *
                     </label>
                     <div className="grid grid-cols-2 gap-3">
-                      <label className="flex items-center justify-center p-3 border-2 border-purple-200 rounded-xl cursor-pointer hover:bg-purple-50 transition-colors">
+                      <label className="flex items-center justify-center p-3 border-2 border-dusty-blue/20 rounded-xl cursor-pointer hover:bg-dusty-blue/10 transition-colors">
                         <input
                           name="attendance"
                           type="radio"
@@ -130,16 +157,16 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                         />
                         <div className={`w-4 h-4 rounded-full border-2 mr-3 ${
                           formData.attendance === 'yes' 
-                            ? 'bg-purple-600 border-purple-600' 
+                            ? 'bg-dusty-blue border-dusty-blue' 
                             : 'border-gray-300'
                         }`}>
                           {formData.attendance === 'yes' && (
                             <div className="w-2 h-2 bg-white rounded-full mx-auto mt-0.5"></div>
                           )}
                         </div>
-                        <span className="typography-caption text-sm">✨ Yes, I'll be there!</span>
+                        <span className="typography-caption">✨ Yes, I'll be there!</span>
                       </label>
-                      <label className="flex items-center justify-center p-3 border-2 border-purple-200 rounded-xl cursor-pointer hover:bg-purple-50 transition-colors">
+                      <label className="flex items-center justify-center p-3 border-2 border-dusty-blue/20 rounded-xl cursor-pointer hover:bg-dusty-blue/10 transition-colors">
                         <input
                           name="attendance"
                           type="radio"
@@ -150,22 +177,26 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                         />
                         <div className={`w-4 h-4 rounded-full border-2 mr-3 ${
                           formData.attendance === 'no' 
-                            ? 'bg-purple-600 border-purple-600' 
+                            ? 'bg-dusty-blue border-dusty-blue' 
                             : 'border-gray-300'
                         }`}>
                           {formData.attendance === 'no' && (
                             <div className="w-2 h-2 bg-white rounded-full mx-auto mt-0.5"></div>
                           )}
                         </div>
-                        <span className="typography-caption text-sm">😢 Sorry, can't make it</span>
+                        <span className="typography-caption">😢 Sorry, can't make it</span>
                       </label>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Special Message */}
-                  <div>
-                    <label className="flex items-center text-sm typography-caption text-gray-700 mb-2">
-                      <MessageSquare size={16} className="mr-2 text-purple-600" />
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.7 }}
+                  >
+                    <label className="flex items-center typography-caption text-gray-700 mb-2">
+                      <MessageSquare size={16} className="mr-2 text-dusty-blue" />
                       Special Message
                     </label>
                     <textarea
@@ -173,17 +204,20 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                       rows={3}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all typography-caption resize-none"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-dusty-blue/20 focus:border-dusty-blue focus:ring-2 focus:ring-dusty-blue/20 outline-none transition-all typography-body resize-none bg-white/80"
                       placeholder="Any special wishes for the happy couple..."
                     />
-                  </div>
+                  </motion.div>
 
                   {/* Submit Button */}
                   <motion.button
                     type="submit"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl typography-button shadow-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center space-x-2"
+                    className="w-full bg-gradient-to-r from-dusty-blue to-dusty-blue/80 text-white py-4 rounded-xl typography-button shadow-lg hover:from-dusty-blue/90 hover:to-dusty-blue/70 transition-all duration-300 flex items-center justify-center space-x-2"
                   >
                     <Send size={18} />
                     <span>Send RSVP</span>
@@ -194,22 +228,24 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
           ) : (
             <motion.div
               key="success"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.8, type: 'spring', stiffness: 200 }}
-              className="text-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="text-center max-w-md"
             >
               <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 0.5, repeat: 2 }}
-                className="text-6xl mb-6"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-5xl mb-6"
               >
                 🎉
               </motion.div>
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
-              <h2 className="typography-heading text-3xl text-green-700 mb-4">
+              <CheckCircle className="w-12 h-12 text-dusty-blue mx-auto mb-6" />
+              <h2 className="typography-heading text-dusty-blue mb-4">
                 Re a leboga!
               </h2>
+              <div className="w-16 h-px bg-dusty-blue mx-auto mb-4" />
               <p className="typography-body text-gray-700 mb-2">
                 Thank you for your RSVP
               </p>
@@ -221,29 +257,29 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
         </AnimatePresence>
       </div>
 
-      {/* Background decorations */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(8)].map((_, i) => (
+      {/* Decorative elements - consistent with other scenes */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute text-purple-200 text-3xl"
+            className="absolute text-dusty-blue/10 text-2xl"
             style={{
               left: `${10 + Math.random() * 80}%`,
               top: `${10 + Math.random() * 80}%`,
             }}
             animate={{
-              y: [0, -20, 0],
-              rotate: [0, 10, -10, 0],
+              rotate: [0, 360],
               scale: [1, 1.1, 1],
+              y: [0, -10, 0],
             }}
             transition={{
-              duration: 4 + Math.random() * 2,
+              duration: 8 + Math.random() * 4,
               repeat: Infinity,
               ease: 'easeInOut',
               delay: Math.random() * 3,
             }}
           >
-            {['💝', '💕', '💖', '🌸', '✨'][Math.floor(Math.random() * 5)]}
+            {['✨', '🌟', '💫', '🤍', '💙', '🌸'][i]}
           </motion.div>
         ))}
       </div>

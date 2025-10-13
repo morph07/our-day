@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Clock, Sun, Church, Users, Moon, Calendar, Download } from 'lucide-react';
+import { Clock, Sun, Church, Users, Moon, Calendar, Download, Phone } from 'lucide-react';
 
 interface SceneProps {
   onNext: () => void;
@@ -62,7 +62,7 @@ export default function Scene3DateTheme({ isActive }: SceneProps) {
   // Save the date functionality
   const generateCalendarLink = (type: 'google' | 'outlook' | 'ics') => {
     const eventDetails = {
-      title: 'Koketso & Morape Wedding',
+      title: 'Koketso Morapedi & Neo Letsholathebe Wedding',
       startDate: '20251206T050000Z', // December 6, 2025, 5:00 AM UTC
       endDate: '20251206T170000Z',   // December 6, 2025, 5:00 PM UTC
       location: 'Letsholathebe, Botswana',
@@ -186,7 +186,6 @@ END:VCALENDAR`;
           </motion.div>
         </motion.div>
 
-
         {/* Schedule Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -252,6 +251,45 @@ END:VCALENDAR`;
               Join us for a day filled with love, tradition, and celebration
             </p>
           </motion.div>
+        </motion.div>
+
+        {/* Contact Information Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
+          className="w-full max-w-md mt-8"
+        >
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+            <div className="flex items-center justify-center mb-4">
+              <Phone className="w-5 h-5 text-white mr-2" />
+              <span className="text-white font-medium">For More Information</span>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="text-center">
+                <p className="text-white/90 text-sm font-medium mb-1">RSVP</p>
+                <a 
+                  href="tel:+26775950123" 
+                  className="text-white hover:text-white/80 transition-colors duration-200 font-medium"
+                >
+                  Kaone +267 75 950 123
+                </a>
+              </div>
+              
+              <div className="w-12 h-px bg-white/40 mx-auto" />
+              
+              <div className="text-center">
+                <p className="text-white/90 text-sm font-medium mb-1">Contact</p>
+                <a 
+                  href="tel:+26775268992" 
+                  className="text-white hover:text-white/80 transition-colors duration-200 font-medium"
+                >
+                  Seelo +267 75 268 992
+                </a>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Decorative elements */}
