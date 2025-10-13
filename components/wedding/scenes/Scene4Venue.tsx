@@ -61,7 +61,7 @@ export default function Scene4Venue({ isActive }: SceneProps) {
             </h2>
 
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-dusty-blue/20">
-              <h1 className="text-4xl font-script text-dusty-blue mb-2">
+              <h1 className="text-4xl font-decorative text-dusty-blue mb-2">
                 Letsholathebe
               </h1>
               <div className="w-16 h-px bg-dusty-blue/50 mx-auto mb-4" />

@@ -66,7 +66,7 @@ export default function Scene5Schedule({ isActive }: SceneProps) {
           className="text-center mb-8"
         >
           <div className="text-4xl mb-4">⏰</div>
-          <h2 className="text-2xl font-script text-dusty-blue mb-2">
+          <h2 className="typography-heading text-dusty-blue mb-2">
             Our Special Day
           </h2>
           <div className="w-16 h-px bg-dusty-blue mx-auto" />
@@ -127,17 +127,17 @@ export default function Scene5Schedule({ isActive }: SceneProps) {
                   className="flex-1 bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md border border-dusty-blue/10"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-serif font-medium text-gray-800">
+                    <h3 className="text-lg typography-formal font-medium text-gray-800">
                       {item.title}
                     </h3>
                     <div className="flex items-center space-x-1 text-dusty-blue">
                       <Clock size={16} />
-                      <span className="text-sm font-serif font-medium">
+                      <span className="text-sm typography-formal font-medium">
                         {item.time}
                       </span>
                     </div>
                   </div>
-                  <p className="text-sm font-serif text-gray-600 leading-relaxed">
+                  <p className="text-sm typography-formal text-gray-600 leading-relaxed">
                     {item.caption}
                   </p>
                 </motion.div>
@@ -153,7 +153,7 @@ export default function Scene5Schedule({ isActive }: SceneProps) {
           transition={{ duration: 0.8, delay: 1.5 }}
           className="text-center mt-8 max-w-sm"
         >
-          <p className="text-sm font-serif text-gray-600 italic">
+          <p className="text-sm typography-formal text-gray-600 italic">
             Join us for a day filled with love, tradition, and celebration
           </p>
         </motion.div>

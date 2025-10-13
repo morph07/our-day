@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -11,6 +10,8 @@
   --font-mono: var(--font-geist-mono);
   --font-script: 'Great Vibes', cursive;
   --font-serif: 'Playfair Display', serif;
+  --font-decorative: 'Cinzel Decorative', serif;
+  --font-body: 'Nunito', sans-serif;
   --color-dusty-blue: #A3BFD9;
   --color-silver: #C5C6C7;
   --color-beige: #EAE6E1;
@@ -123,6 +124,68 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+}
+
+@layer utilities {
+  /* Typography System - Consistent Font Usage */
+  
+  /* PRIMARY HEADINGS - Cinzel Decorative for main titles */
+  .font-decorative {
+    font-family: var(--font-decorative);
+  }
+  
+  /* ROMANTIC TEXT - Great Vibes for names, special phrases */
+  .font-script {
+    font-family: var(--font-script);
+  }
+  
+  /* FORMAL TEXT - Playfair Display for dates, venues, formal info */
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  
+  /* BODY TEXT - Nunito for descriptions, UI, forms */
+  .font-body {
+    font-family: var(--font-body);
+  }
+  
+  /* Semantic Typography Classes */
+  .typography-hero {
+    @apply font-decorative text-4xl font-bold;
+  }
+  
+  .typography-heading {
+    @apply font-decorative text-2xl font-semibold;
+  }
+  
+  .typography-subheading {
+    @apply font-serif text-xl font-medium;
+  }
+  
+  .typography-romantic {
+    @apply font-script text-lg;
+  }
+  
+  .typography-formal {
+    @apply font-serif text-base;
+  }
+  
+  .typography-body {
+    @apply font-body text-base;
+  }
+  
+  .typography-caption {
+    @apply font-body text-sm;
+  }
+  
+  .typography-button {
+    @apply font-body font-medium;
+  }
+  
+  /* 3D Transform utilities */
+  .backface-hidden {
+    backface-visibility: hidden;
   }
 }

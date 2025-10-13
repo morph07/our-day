@@ -105,11 +105,11 @@ END:VCALENDAR`;
             className="mb-8"
           >
             <div className="text-6xl mb-6">💝</div>
-            <h2 className="text-3xl font-script text-dusty-blue mb-4">
+            <h2 className="typography-heading text-3xl text-dusty-blue mb-4">
               With love and gratitude
             </h2>
             <div className="w-24 h-px bg-dusty-blue mx-auto mb-6" />
-            <h1 className="text-4xl font-script text-gray-700">
+            <h1 className="typography-romantic text-4xl text-gray-700">
               Koketso & Neo
             </h1>
           </motion.div>
@@ -138,7 +138,7 @@ END:VCALENDAR`;
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={shareOnWhatsApp}
-              className="w-full bg-green-500 text-white py-3 px-6 rounded-full font-serif font-medium shadow-lg hover:bg-green-600 transition-colors flex items-center justify-center space-x-2"
+              className="w-full bg-green-500 text-white py-3 px-6 rounded-full typography-button font-medium shadow-lg hover:bg-green-600 transition-colors flex items-center justify-center space-x-2"
             >
               <Share2 size={20} />
               <span>Share on WhatsApp</span>
@@ -149,7 +149,7 @@ END:VCALENDAR`;
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={saveTheDate}
-              className="w-full bg-dusty-blue text-white py-3 px-6 rounded-full font-serif font-medium shadow-lg hover:bg-dusty-blue/90 transition-colors flex items-center justify-center space-x-2"
+              className="w-full bg-dusty-blue text-white py-3 px-6 rounded-full typography-button font-medium shadow-lg hover:bg-dusty-blue/90 transition-colors flex items-center justify-center space-x-2"
             >
               <Download size={20} />
               <span>Save the Date</span>
@@ -160,7 +160,7 @@ END:VCALENDAR`;
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={addToCalendar}
-              className="w-full bg-silver text-gray-700 py-3 px-6 rounded-full font-serif font-medium shadow-lg hover:bg-silver/90 transition-colors flex items-center justify-center space-x-2"
+              className="w-full bg-silver text-gray-700 py-3 px-6 rounded-full typography-button font-medium shadow-lg hover:bg-silver/90 transition-colors flex items-center justify-center space-x-2"
             >
               <Calendar size={20} />
               <span>Add to Calendar</span>
@@ -175,10 +175,10 @@ END:VCALENDAR`;
             className="mt-8"
           >
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md border border-dusty-blue/20">
-              <p className="text-sm font-serif text-gray-600 italic leading-relaxed">
+              <p className="typography-caption text-gray-600 italic leading-relaxed">
                 &ldquo;Love is not just looking at each other, it&apos;s looking in the same direction together.&rdquo;
               </p>
-              <p className="text-xs font-serif text-gray-500 mt-2">
+              <p className="typography-caption text-xs text-gray-500 mt-2">
                 — Antoine de Saint-Exupéry
               </p>
             </div>
@@ -191,7 +191,7 @@ END:VCALENDAR`;
             transition={{ duration: 1, delay: 1.5 }}
             className="mt-6"
           >
-            <p className="text-xs font-serif text-gray-400 italic">
+            <p className="typography-caption text-xs text-gray-400 italic">
               🎵 Music fading softly...
             </p>
           </motion.div>

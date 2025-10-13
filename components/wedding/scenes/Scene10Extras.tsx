@@ -52,7 +52,7 @@ export default function Scene10Extras({ isActive }: SceneProps) {
             className="text-center mb-8"
           >
             <div className="text-5xl mb-4">📸</div>
-            <h2 className="text-2xl font-script text-dusty-blue mb-2">
+            <h2 className="text-2xl font-decorative text-dusty-blue mb-2">
               Our Journey to Forever
             </h2>
             <div className="w-16 h-px bg-dusty-blue mx-auto" />

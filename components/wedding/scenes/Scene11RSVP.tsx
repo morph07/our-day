@@ -58,15 +58,15 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
               >
                 <div className="text-center mb-8">
                   <div className="text-5xl mb-4">💌</div>
-                  <h3 className="text-3xl font-script text-purple-700 mb-2">
+                  <h3 className="typography-hero text-3xl text-purple-700 mb-2">
                     Please RSVP
                   </h3>
                   <div className="w-20 h-1 bg-purple-400 mx-auto rounded-full mb-4" />
-                  <p className="text-sm text-gray-600 font-serif">
+                  <p className="typography-caption text-gray-600">
                     Your presence would make our special day complete
                   </p>
                   <div className="bg-purple-50 rounded-xl p-4 mt-4">
-                    <p className="text-xs font-serif text-purple-700 font-medium">
+                    <p className="typography-caption text-xs text-purple-700 font-medium">
                       Please respond by 15 November 2025
                     </p>
                   </div>
@@ -81,7 +81,7 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                 >
                   {/* Name */}
                   <div>
-                    <label className="flex items-center text-sm font-serif text-gray-700 mb-2">
+                    <label className="flex items-center text-sm typography-caption text-gray-700 mb-2">
                       <User size={16} className="mr-2 text-purple-600" />
                       Full Name *
                     </label>
@@ -91,14 +91,14 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all font-serif"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all typography-caption"
                       placeholder="Enter your full name"
                     />
                   </div>
 
                   {/* Phone Number */}
                   <div>
-                    <label className="flex items-center text-sm font-serif text-gray-700 mb-2">
+                    <label className="flex items-center text-sm typography-caption text-gray-700 mb-2">
                       <Phone size={16} className="mr-2 text-purple-600" />
                       Phone Number *
                     </label>
@@ -108,14 +108,14 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                       required
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all font-serif"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all typography-caption"
                       placeholder="Enter your phone number"
                     />
                   </div>
 
                   {/* Attendance */}
                   <div>
-                    <label className="block text-sm font-serif text-gray-700 mb-3">
+                    <label className="block text-sm typography-caption text-gray-700 mb-3">
                       Will you be attending? *
                     </label>
                     <div className="grid grid-cols-2 gap-3">
@@ -137,7 +137,7 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                             <div className="w-2 h-2 bg-white rounded-full mx-auto mt-0.5"></div>
                           )}
                         </div>
-                        <span className="font-serif text-sm">✨ Yes, I'll be there!</span>
+                        <span className="typography-caption text-sm">✨ Yes, I'll be there!</span>
                       </label>
                       <label className="flex items-center justify-center p-3 border-2 border-purple-200 rounded-xl cursor-pointer hover:bg-purple-50 transition-colors">
                         <input
@@ -157,14 +157,14 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                             <div className="w-2 h-2 bg-white rounded-full mx-auto mt-0.5"></div>
                           )}
                         </div>
-                        <span className="font-serif text-sm">😢 Sorry, can't make it</span>
+                        <span className="typography-caption text-sm">😢 Sorry, can't make it</span>
                       </label>
                     </div>
                   </div>
 
                   {/* Special Message */}
                   <div>
-                    <label className="flex items-center text-sm font-serif text-gray-700 mb-2">
+                    <label className="flex items-center text-sm typography-caption text-gray-700 mb-2">
                       <MessageSquare size={16} className="mr-2 text-purple-600" />
                       Special Message
                     </label>
@@ -173,7 +173,7 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                       rows={3}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all font-serif resize-none"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all typography-caption resize-none"
                       placeholder="Any special wishes for the happy couple..."
                     />
                   </div>
@@ -183,7 +183,7 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                     type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-serif font-medium shadow-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center space-x-2"
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl typography-button shadow-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center space-x-2"
                   >
                     <Send size={18} />
                     <span>Send RSVP</span>
@@ -207,13 +207,13 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                 🎉
               </motion.div>
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
-              <h2 className="text-3xl font-script text-green-700 mb-4">
+              <h2 className="typography-heading text-3xl text-green-700 mb-4">
                 Re a leboga!
               </h2>
-              <p className="text-lg font-serif text-gray-700 mb-2">
+              <p className="typography-body text-gray-700 mb-2">
                 Thank you for your RSVP
               </p>
-              <p className="text-sm font-serif text-gray-600 mb-4">
+              <p className="typography-caption text-gray-600 mb-4">
                 We can't wait to celebrate with you on our special day
               </p>
             </motion.div>

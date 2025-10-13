@@ -2,21 +2,28 @@
 
 Place your wedding music files in this directory.
 
-## Recommended file:
-- `wedding-music.mp3` - Background music for the wedding story scenes
+## Current file:
+- `wedding-music.mp3` - "Alex Warren - Ordinary" (4.5MB)
+
+## Optimization Recommendations:
+- **Current file is large (4.5MB)** - Consider compressing for faster loading
+- Use online tools like [Audio Compressor](https://www.freeconvert.com/audio-compressor) 
+- Target: 128kbps MP3, mono if possible, under 2MB
+- Test different bitrates: 96kbps, 128kbps, 160kbps
 
 ## Supported formats:
-- MP3
+- MP3 (recommended)
 - WAV
 - OGG
 
-## Recommendations:
+## Best Practices:
 - Use a gentle, romantic instrumental piece
-- Keep file size reasonable (under 5MB)
+- Keep file size under 2MB for faster loading
 - Consider looping capability
-- Volume should be moderate to not overpower the content
+- Volume should be moderate to not overpower content
+- Test loading speed on slower connections
 
-## Example files you could use:
-- Classical wedding pieces (Canon in D, Wedding March, etc.)
-- Soft instrumental versions of love songs
-- Ambient romantic music
+## Performance Tips:
+- Compress audio without losing quality
+- Consider using a CDN for audio delivery
+- Add preload hints in HTML head if needed

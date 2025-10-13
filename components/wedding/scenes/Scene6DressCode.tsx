@@ -39,7 +39,7 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
             className="mb-8"
           >
             <div className="text-5xl mb-4">👗</div>
-            <h2 className="text-2xl font-script text-dusty-blue mb-2">
+            <h2 className="typography-heading text-dusty-blue mb-2">
               Dress Code
             </h2>
             <div className="w-16 h-px bg-dusty-blue mx-auto" />
@@ -52,10 +52,10 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mb-8"
           >
-            <h3 className="text-xl font-serif font-medium text-gray-800 mb-4">
+            <h3 className="typography-subheading text-gray-800 mb-4">
               Dusty Blue and White
             </h3>
-            <p className="text-lg font-serif italic text-dusty-blue mb-6">
+            <p className="typography-body italic text-dusty-blue mb-6">
               Colors of peace and purity
             </p>
           </motion.div>
@@ -91,12 +91,12 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
                       ease: 'easeInOut',
                       delay: index * 0.5 
                     }}
-                    className={`text-xs font-serif ${swatch.textColor}`}
+                    className={`text-xs font-body ${swatch.textColor}`}
                   >
                     ✨
                   </motion.div>
                 </div>
-                <span className="text-xs font-serif text-gray-600">
+                <span className="text-xs font-body text-gray-600">
                   {swatch.name}
                 </span>
               </motion.div>
@@ -114,11 +114,11 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md border border-dusty-blue/20">
               <div className="flex items-center justify-center mb-3">
                 <span className="text-2xl mr-2">🤵</span>
-                <h4 className="text-lg font-serif font-medium text-gray-800">
+                <h4 className="typography-subheading text-lg text-gray-800">
                   Gentlemen
                 </h4>
               </div>
-              <p className="text-sm font-serif text-gray-600">
+              <p className="typography-caption text-gray-600">
                 Navy or Dusty tones
               </p>
             </div>
@@ -127,11 +127,11 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md border border-dusty-blue/20">
               <div className="flex items-center justify-center mb-3">
                 <span className="text-2xl mr-2">👰</span>
-                <h4 className="text-lg font-serif font-medium text-gray-800">
+                <h4 className="typography-subheading text-lg text-gray-800">
                   Ladies
                 </h4>
               </div>
-              <p className="text-sm font-serif text-gray-600">
+              <p className="typography-caption text-gray-600">
                 Flowing whites & pastels
               </p>
             </div>
@@ -144,7 +144,7 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
             transition={{ duration: 0.8, delay: 1.8 }}
             className="mt-8"
           >
-            <p className="text-sm font-serif text-gray-500 italic">
+            <p className="typography-caption text-gray-500 italic">
               Let us celebrate in harmony and elegance
             </p>
           </motion.div>

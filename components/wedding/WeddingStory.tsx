@@ -46,16 +46,23 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   const progressRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartRef = useRef<number>(0);
   const lastInteractionRef = useRef<number>(0);
+  const [isAudioLoaded, setIsAudioLoaded] = useState(false);
+  const [isAudioError, setIsAudioError] = useState(false);
 
   // Background music - add your wedding music file to public/audio/
   const [play, { stop, pause, sound }] = useSound('/audio/wedding-music.mp3', {
     loop: true,
     volume: 0.3,
+    preload: true, // Preload the audio file
     onload: () => {
       console.log('Wedding music loaded successfully');
+      setIsAudioLoaded(true);
+      setIsAudioError(false);
     },
-    onloaderror: () => {
-      console.log('Could not load wedding music. Please add wedding-music.mp3 to public/audio/');
+    onloaderror: (error: any) => {
+      console.log('Could not load wedding music. Please add wedding-music.mp3 to public/audio/', error);
+      setIsAudioLoaded(false);
+      setIsAudioError(true);
     }
   });
 
@@ -109,11 +116,18 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     };
   }, [currentScene, isPlaying]);
 
-  // Audio control
+  // Audio control - only play when audio is loaded
   useEffect(() => {
+    if (!isAudioLoaded || isAudioError) {
+      console.log('Audio not ready yet, waiting...', { isAudioLoaded, isAudioError });
+      return;
+    }
+
     if (!isMuted && isPlaying) {
+      console.log('Starting music playback');
       play();
     } else {
+      console.log('Pausing music playback');
       pause();
     }
 
@@ -123,7 +137,15 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
         stop();
       }
     };
-  }, [isMuted, isPlaying, play, pause, sound, stop]);
+  }, [isMuted, isPlaying, isAudioLoaded, isAudioError, play, pause, sound, stop]);
+
+  // Auto-start music when loaded (if not muted)
+  useEffect(() => {
+    if (isAudioLoaded && !isMuted && isPlaying) {
+      console.log('Audio loaded, auto-starting music');
+      play();
+    }
+  }, [isAudioLoaded, isMuted, isPlaying, play]);
 
   // Cleanup on component unmount
   useEffect(() => {
@@ -287,9 +309,25 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
           toggleMute();
         }}
         className="absolute top-4 right-4 z-50 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
-        title={isMuted ? "Unmute music" : "Mute music"}
+        title={
+          !isAudioLoaded && !isAudioError ? "Loading music..." :
+          isAudioError ? "Music failed to load" :
+          isMuted ? "Unmute music" : "Mute music"
+        }
       >
-        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+        {!isAudioLoaded && !isAudioError ? (
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+          />
+        ) : isAudioError ? (
+          <VolumeX size={20} className="text-red-400" />
+        ) : isMuted ? (
+          <VolumeX size={20} />
+        ) : (
+          <Volume2 size={20} />
+        )}
       </button>
 
       {/* Restart button (shown on last scene) */}
@@ -326,7 +364,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
       {/* Navigation hints */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50 text-white/70 text-sm text-center">
-        <p>Tap sides to navigate • Swipe to change scenes</p>
+        <p className="font-body">Tap sides to navigate • Swipe to change scenes</p>
       </div>
     </div>
   );

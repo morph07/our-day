@@ -61,7 +61,7 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="space-y-6"
           >
-            <p className="text-xl font-serif text-gray-700 leading-relaxed">
+            <p className="typography-body text-xl text-gray-700 leading-relaxed">
               Together with our families, we joyfully invite you to witness our covenant of love.
             </p>
 
@@ -72,10 +72,10 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
               transition={{ duration: 0.8, delay: 1.2 }}
               className="border-t border-b border-dusty-blue/30 py-4 my-6"
             >
-              <p className="text-lg font-serif italic text-dusty-blue">
+              <p className="typography-body italic text-dusty-blue">
                 Re laletsa lona mo lenyalong la rona
               </p>
-              <p className="text-sm font-serif text-gray-600 mt-2">
+              <p className="typography-caption text-gray-600 mt-2">
                 We invite you to our wedding
               </p>
             </motion.div>
