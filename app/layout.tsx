@@ -56,6 +56,16 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Great+Vibes&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+        <script type="text/javascript"
+                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+        </script>
+        <script type="text/javascript">
+           {`(function(){
+              emailjs.init({
+                publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+              });
+           })();`}
+        </script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
