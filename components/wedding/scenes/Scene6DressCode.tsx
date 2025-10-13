@@ -59,9 +59,9 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
           >
             <div className="mb-4 flex justify-center">
               <img 
-                src="/images/illustrations/hand-drawn-one-line-art-illustration copy.png" 
+                src="/images/illustrations/Married Couple Wedding.png" 
                 alt="Decorative flower illustration"
-                className="w-32 h-32 object-contain"
+                className="w-42 h-42 object-contain"
               />
             </div>
             <h2 className="typography-heading text-dusty-blue mb-2">
@@ -102,51 +102,95 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
             <h4 className="typography-subheading text-gray-800 mb-4">
               Dress Code
             </h4>
-            <p className="typography-body italic text-dusty-blue mb-6">
-              Colors of peace and purity
-            </p>
+
           </motion.div>
 
 
-          {/* Dress code details */}
+          {/* Matsela Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="space-y-6"
+            className="mb-8"
           >
-            {/* Gentlemen */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md border border-dusty-blue/20">
-              <div className="flex items-center justify-center mb-3">
-                <span className="text-2xl mr-2">🤵</span>
-                <h4 className="typography-subheading text-lg text-gray-800">
-                  Gentlemen
-                </h4>
-              </div>
-              <p className="typography-caption text-gray-600">
-                Navy or Dusty tones
-              </p>
+            {/* Matsela Header */}
+            <div className="text-center mb-8">
+              <motion.h4 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+                className="typography-heading text-2xl text-dusty-blue mb-3"
+              >
+                Matsela
+              </motion.h4>
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: '4rem' }}
+                transition={{ duration: 0.8, delay: 1.1 }}
+                className="h-px bg-dusty-blue mx-auto mb-4"
+              />
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                className="typography-body text-gray-600 text-sm italic"
+              >
+                Traditional fabrics for our families
+              </motion.p>
             </div>
+            
+            {/* Cloth Images Display */}
+            <div className="flex flex-col items-center space-y-8">
+              {/* Bride's Side */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1.3 }}
+                className="text-center"
+              >
+                <img 
+                  src="/images/Cloths/Bride Cloth.png" 
+                  alt="Bride Family Traditional Cloth"
+                  className="w-64 h-40 object-cover rounded-xl shadow-lg mb-4 mx-auto"
+                />
+                <h5 className="typography-formal text-lg font-semibold text-dusty-blue mb-2">
+                  Bride's Family & Friends
+                </h5>
+                <div className="w-12 h-px bg-dusty-blue mx-auto mb-2" />
+                <p className="typography-caption text-dusty-blue text-sm">
+                  For the bride's side
+                </p>
+              </motion.div>
 
-            {/* Ladies */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md border border-dusty-blue/20">
-              <div className="flex items-center justify-center mb-3">
-                <span className="text-2xl mr-2">👰</span>
-                <h4 className="typography-subheading text-lg text-gray-800">
-                  Ladies
-                </h4>
-              </div>
-              <p className="typography-caption text-gray-600">
-                Flowing whites & pastels
-              </p>
+              {/* Groom's Side */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1.4 }}
+                className="text-center"
+              >
+                <img 
+                  src="/images/Cloths/Groom Cloth.png" 
+                  alt="Groom Family Traditional Cloth"
+                  className="w-64 h-40 object-cover rounded-xl shadow-lg mb-4 mx-auto"
+                />
+                <h5 className="typography-formal text-lg font-semibold text-dusty-blue mb-2">
+                  Groom's Family & Friends
+                </h5>
+                <div className="w-12 h-px bg-dusty-blue mx-auto mb-2" />
+                <p className="typography-caption text-dusty-blue text-sm">
+                  For the groom's side
+                </p>
+              </motion.div>
             </div>
           </motion.div>
+
 
           {/* Bottom message */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
+            transition={{ duration: 0.8, delay: 1.6 }}
             className="mt-8"
           >
             <p className="typography-caption text-gray-500 italic">
