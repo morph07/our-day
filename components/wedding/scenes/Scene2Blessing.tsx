@@ -11,9 +11,41 @@ interface SceneProps {
 
 export default function Scene2Blessing({ isActive }: SceneProps) {
   const [isMounted, setIsMounted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  // Countdown timer effect
+  useEffect(() => {
+    const weddingDate = new Date('2025-12-06T00:00:00').getTime();
+    
+    const updateTimer = () => {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance > 0) {
+        setTimeLeft({
+          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((distance % (1000 * 60)) / 1000)
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    updateTimer(); // Initial call
+    const interval = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // Generate consistent positions for floating elements
@@ -62,7 +94,8 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
             className="space-y-6"
           >
             <p className="typography-body text-xl text-gray-700 leading-relaxed">
-              Together with our families, we joyfully invite you to witness our covenant of love.
+             It is with great joy and love that we invite you to witness and celebrate the beginning of our forever.
+             As we exchange our vows and start a new chapter, your presense will mean the world to us.
             </p>
 
             {/* Setswana greeting */}
@@ -73,11 +106,9 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
               className="border-t border-b border-dusty-blue/30 py-4 my-6"
             >
               <p className="typography-body italic text-dusty-blue">
-                Re laletsa lona mo lenyalong la rona
+                Rea go laletsa lona mo lenyalong la rona.
               </p>
-              <p className="typography-caption text-gray-600 mt-2">
-                We invite you to our wedding
-              </p>
+       
             </motion.div>
 
             {/* Initials with heart */}
@@ -97,6 +128,50 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
                   💙
                 </motion.span>
                 <span>N</span>
+              </div>
+            </motion.div>
+
+            {/* Countdown Timer */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 2.0 }}
+              className="text-center mt-8"
+            >
+              <h3 className="typography-formal text-lg text-gray-600 mb-4">SEE YOU IN</h3>
+              <div className="grid grid-cols-4 gap-4 max-w-sm mx-auto">
+                <motion.div 
+                  className="bg-white/80 rounded-lg p-3 shadow-sm border border-dusty-blue/20"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 1, repeat: Infinity, delay: 0 }}
+                >
+                  <div className="typography-heading text-2xl text-dusty-blue">{timeLeft.days}</div>
+                  <div className="typography-caption text-gray-600">Days</div>
+                </motion.div>
+                <motion.div 
+                  className="bg-white/80 rounded-lg p-3 shadow-sm border border-dusty-blue/20"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 1, repeat: Infinity, delay: 0.25 }}
+                >
+                  <div className="typography-heading text-2xl text-dusty-blue">{timeLeft.hours}</div>
+                  <div className="typography-caption text-gray-600">Hours</div>
+                </motion.div>
+                <motion.div 
+                  className="bg-white/80 rounded-lg p-3 shadow-sm border border-dusty-blue/20"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
+                >
+                  <div className="typography-heading text-2xl text-dusty-blue">{timeLeft.minutes}</div>
+                  <div className="typography-caption text-gray-600">Minutes</div>
+                </motion.div>
+                <motion.div 
+                  className="bg-white/80 rounded-lg p-3 shadow-sm border border-dusty-blue/20"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 1, repeat: Infinity, delay: 0.75 }}
+                >
+                  <div className="typography-heading text-2xl text-dusty-blue">{timeLeft.seconds}</div>
+                  <div className="typography-caption text-gray-600">Seconds</div>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>
