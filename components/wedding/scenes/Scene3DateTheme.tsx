@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Clock, Sun, Church, Users, Moon } from 'lucide-react';
 
 interface SceneProps {
   onNext: () => void;
@@ -8,12 +9,61 @@ interface SceneProps {
   isActive: boolean;
 }
 
+interface ScheduleItem {
+  time: string;
+  title: string;
+  caption: string;
+  location: string;
+  locationLink: string;
+  icon: React.ReactNode;
+  color: string;
+}
+
+const scheduleItems: ScheduleItem[] = [
+  {
+    time: '5:00 AM',
+    title: 'PATLO/ MAGADI',
+    caption: 'The morning begins with unity and tradition',
+    location: 'Letsholathebe Family Home',
+    locationLink: 'https://maps.google.com/?q=Letsholathebe,Botswana',
+    icon: <Sun size={20} />,
+    color: 'text-orange-500',
+  },
+  {
+    time: '9:00 AM',
+    title: 'CHURCH SERVICE',
+    caption: 'We gather before God to vow our forever',
+    location: 'Local Church, Letsholathebe',
+    locationLink: 'https://maps.google.com/?q=Church+Letsholathebe,Botswana',
+    icon: <Church size={20} />,
+    color: 'text-dusty-blue',
+  },
+  {
+    time: '11:00 AM',
+    title: 'RECEPTION',
+    caption: 'Laughter, feasting, and celebration follow',
+    location: 'Reception Venue, Letsholathebe',
+    locationLink: 'https://maps.google.com/?q=Letsholathebe,Botswana',
+    icon: <Users size={20} />,
+    color: 'text-green-500',
+  },
+  {
+    time: '5:00 PM',
+    title: 'KGOROSO',
+    caption: 'Evening reflection and family fellowship',
+    location: 'Letsholathebe Community Hall',
+    locationLink: 'https://maps.google.com/?q=Letsholathebe+Community+Hall,Botswana',
+    icon: <Moon size={20} />,
+    color: 'text-purple-500',
+  },
+];
+
 export default function Scene3DateTheme({ isActive }: SceneProps) {
   return (
     <motion.div 
       className="relative w-full h-full overflow-hidden"
       initial={{ background: 'linear-gradient(to bottom right, #ffffff, #EAE6E1)' }}
-      animate={{ background: 'linear-gradient(to bottom right, #A3BFD9, #ffffff)' }}
+      animate={{ background: 'linear-gradient(to bottom right, #8BADD6,rgb(4, 65, 96))' }}
       transition={{ duration: 2, ease: 'easeInOut' }}
     >
       {/* Background pattern */}
@@ -22,115 +72,118 @@ export default function Scene3DateTheme({ isActive }: SceneProps) {
       </div>
 
       {/* Main content */}
-      <div className="flex flex-col items-center justify-center h-full px-8 text-center relative z-10">
+      <div className="flex flex-col items-center justify-start h-full px-6 py-8 text-center relative z-10 overflow-y-auto">
+        {/* Header with Date */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-          className="max-w-lg"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="mb-8"
         >
-          {/* Heaven's smile */}
-          <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-8"
-          >
-            <div className="text-5xl mb-4">☀️</div>
-            <h2 className="typography-heading text-gray-700 mb-2">
-              The day the heavens will smile
-            </h2>
-          </motion.div>
+          <h2 className="typography-heading text-white mb-4">
+            The day the heavens will smile
+          </h2>
+          
+          {/* Date Card */}
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-dusty-blue/20 mb-6">
+            <h1 className="typography-hero text-dusty-blue mb-1">Saturday</h1>
+            <div className="text-5xl font-decorative font-bold text-gray-800 mb-1">06</div>
+            <h2 className="typography-subheading text-gray-700 mb-1">December</h2>
+            <div className="typography-formal text-2xl font-medium text-dusty-blue">2025</div>
+          </div>
+        </motion.div>
 
-          {/* Date */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mb-12"
-          >
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-dusty-blue/20">
-              <h1 className="typography-hero text-dusty-blue mb-2">
-                Saturday
-              </h1>
-              <div className="text-6xl font-decorative font-bold text-gray-800 mb-2">
-                06
-              </div>
-              <h2 className="typography-subheading text-gray-700 mb-1">
-                December
-              </h2>
-              <div className="typography-formal text-3xl font-medium text-dusty-blue">
-                2025
-              </div>
-            </div>
-          </motion.div>
 
-          {/* Theme */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="space-y-6"
-          >
-            <div className="w-16 h-px bg-dusty-blue mx-auto" />
+        {/* Schedule Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="w-full max-w-md"
+        >
+          <div className="flex items-center justify-center mb-6">
+            <h3 className="typography-subheading text-white">Timeline</h3>
+          </div>
+          <div className="w-16 h-px bg-white/60 mx-auto mb-6" />
+
+          {/* Timeline */}
+          <div className="relative">
+            {/* Main vertical line */}
+            <div className="absolute left-2 top-0 bottom-0 w-px bg-white/60"></div>
             
-            <div>
-              <h3 className="typography-subheading text-gray-800 mb-2">
-                Theme
-              </h3>
-              <p className="typography-body text-dusty-blue mb-2">
-                Dusty Blue & White
-              </p>
-              <p className="typography-caption text-gray-600 italic">
-                Timeless Grace
-              </p>
+            <div className="space-y-8">
+              {scheduleItems.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: 0.5 + index * 0.15,
+                    ease: 'easeOut' 
+                  }}
+                  className="relative flex items-start"
+                >
+                  {/* Timeline dot */}
+                  <div className="flex-shrink-0 w-4 h-4 bg-white rounded-full border-2 border-white/80 shadow-lg z-10"></div>
+                  
+                  {/* Content */}
+                  <div className="ml-6 flex-1 text-left">
+                    {/* Time */}
+                    <div className="mb-2">
+                      <h3 className="typography-formal text-xl font-bold text-white tracking-wide">
+                        {item.time}
+                      </h3>
+                    </div>
+                    
+                    {/* Event Title */}
+                    <div>
+                      <h4 className="typography-formal text-base font-medium text-white/95 uppercase tracking-wider">
+                        {item.title}
+                      </h4>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
+          </div>
 
-            {/* Color swatches */}
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-              className="flex justify-center space-x-4 mt-6"
-            >
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-dusty-blue shadow-lg border-2 border-white" />
-                <span className="text-xs font-body text-gray-600 mt-2">Dusty Blue</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-white shadow-lg border-2 border-dusty-blue/30" />
-                <span className="text-xs font-body text-gray-600 mt-2">Pure White</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-silver shadow-lg border-2 border-white" />
-                <span className="text-xs font-body text-gray-600 mt-2">Silver</span>
-              </div>
-            </motion.div>
+          {/* Bottom message */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="text-center mt-6"
+          >
+            <p className="text-sm typography-formal text-white/80 italic">
+              Join us for a day filled with love, tradition, and celebration
+            </p>
           </motion.div>
         </motion.div>
 
         {/* Decorative elements */}
         <div className="absolute inset-0 pointer-events-none">
-          {[...Array(8)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute text-white/30 text-lg"
+              className="absolute text-dusty-blue/20 text-lg"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${10 + Math.random() * 80}%`,
+                top: `${10 + Math.random() * 80}%`,
               }}
               animate={{
                 rotate: [0, 360],
                 scale: [1, 1.2, 1],
+                y: [0, -10, 0],
               }}
               transition={{
-                duration: 6 + Math.random() * 4,
+                duration: 6 + Math.random() * 2,
                 repeat: Infinity,
                 ease: 'easeInOut',
                 delay: Math.random() * 3,
               }}
             >
-              ❄️
+              {['✨', '🌟', '💫'][i % 3]}
             </motion.div>
           ))}
         </div>
