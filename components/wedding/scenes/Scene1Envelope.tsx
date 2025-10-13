@@ -40,8 +40,26 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
     duration: 4 + (i % 3),
   }));
 
+  const handleBackgroundClick = (e: React.MouseEvent | React.TouchEvent) => {
+    // Prevent parent navigation when clicking on background
+    e.stopPropagation();
+  };
+
   return (
-    <div className="relative w-full h-full bg-gradient-to-br from-dusty-blue to-blue-300 overflow-hidden">
+    <div 
+      className="relative w-full h-full overflow-hidden"
+      style={{
+        // backgroundImage: "url('/images/Proposal Kiss.JPG')",
+        backgroundImage: "url('/images/After Proposal Shoot.JPG')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+      onClick={handleBackgroundClick}
+      onTouchEnd={handleBackgroundClick}
+    >
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/40"></div>
       {/* Floating petals - only render after mount to avoid hydration mismatch */}
       {isMounted && (
         <div className="absolute inset-0">
@@ -71,7 +89,7 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
       )}
 
       {/* Main content */}
-      <div className="flex flex-col items-center justify-center h-full px-8 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-8 text-center">
         {!isOpened ? (
           /* Closed Invitation Card */
           <motion.div
@@ -101,30 +119,22 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
                 
                 {/* Card content */}
                 <div className="flex flex-col items-center justify-center h-full p-8 text-dusty-blue">
-                  {/* Decorative flourish */}
-                  <motion.div
-                    className="text-4xl mb-6 text-dusty-blue/60"
-                    animate={{ rotate: [0, 5, -5, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    ✨
-                  </motion.div>
                   
-                  <h1 className="typography-romantic text-3xl text-center mb-4 text-dusty-blue">
+                  <h1 className="typography-romantic text-4xl text-center mb-4 text-dusty-blue">
                     Wedding Invitation
                   </h1>
                   
                   <div className="w-16 h-px bg-dusty-blue/40 mb-6"></div>
                   
-                  <p className="typography-body text-lg text-center mb-6 text-dusty-blue/80">
+                  <p className="typography-body text-xl text-center mb-6 text-dusty-blue/80">
                     You are cordially invited to celebrate
                   </p>
                   
                   <div className="text-center space-y-2">
-                    <h2 className="typography-romantic text-2xl text-dusty-blue">
+                    <h2 className="typography-romantic text-4xl text-dusty-blue">
                       Koketso & Neo
                     </h2>
-                    <p className="typography-formal text-dusty-blue/70">
+                    <p className="typography-formal text-lg text-dusty-blue/70">
                       06 December 2025
                     </p>
                   </div>

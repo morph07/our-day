@@ -165,11 +165,11 @@
   }
   
   .typography-romantic {
-    @apply font-script text-lg;
+    @apply font-script ;
   }
   
   .typography-formal {
-    @apply font-serif text-base;
+    @apply font-serif;
   }
   
   .typography-body {
