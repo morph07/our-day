@@ -40,7 +40,6 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const progressRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartRef = useRef<number>(0);
 
@@ -64,18 +63,18 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
   // Auto-advance timer
   useEffect(() => {
-    if (!isPlaying || isPaused) return;
+    if (!isPlaying) return;
 
     const timer = setTimeout(() => {
       nextScene();
     }, 5000); // 5 seconds per scene
 
     return () => clearTimeout(timer);
-  }, [currentScene, isPlaying, isPaused, nextScene]);
+  }, [currentScene, isPlaying, nextScene]);
 
   // Progress bar animation
   useEffect(() => {
-    if (!isPlaying || isPaused) return;
+    if (!isPlaying) return;
 
     setProgress(0);
     const startTime = Date.now();
@@ -98,7 +97,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
         clearTimeout(progressRef.current);
       }
     };
-  }, [currentScene, isPlaying, isPaused]);
+  }, [currentScene, isPlaying]);
 
   // Audio control
   useEffect(() => {
@@ -129,7 +128,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     setIsPlaying(true);
   };
 
-  // Touch handlers for tap/hold
+  // Touch handlers for navigation
   const handleTouchStart = () => {
     touchStartRef.current = Date.now();
   };
@@ -141,13 +140,10 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     const tapX = touch.clientX;
 
     if (touchDuration < 200) { // Quick tap
-      if (tapX < screenWidth / 3) {
-        prevScene(); // Left third - previous
-      } else if (tapX > (screenWidth * 2) / 3) {
-        nextScene(); // Right third - next
+      if (tapX < screenWidth / 2) {
+        prevScene(); // Left half - previous
       } else {
-        // Middle third - pause/play
-        setIsPaused(!isPaused);
+        nextScene(); // Right half - next
       }
     }
   };
@@ -219,21 +215,15 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
           <CurrentSceneComponent 
             onNext={nextScene}
             onPrev={prevScene}
-            isActive={!isPaused}
+            isActive={true}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Pause indicator */}
-      {isPaused && (
-        <div className="absolute inset-0 bg-black/20 flex items-center justify-center z-40">
-          <div className="text-white text-6xl">⏸️</div>
-        </div>
-      )}
 
       {/* Navigation hints */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50 text-white/70 text-sm text-center">
-        <p>Tap sides to navigate • Hold center to pause • Swipe to change scenes</p>
+        <p>Tap sides to navigate • Swipe to change scenes</p>
       </div>
     </div>
   );
