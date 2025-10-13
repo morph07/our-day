@@ -13,10 +13,10 @@ import Scene3DateTheme from './scenes/Scene3DateTheme';
 import Scene4Venue from './scenes/Scene4Venue';
 import Scene5Schedule from './scenes/Scene5Schedule';
 import Scene6DressCode from './scenes/Scene6DressCode';
-import Scene7RSVP from './scenes/Scene7RSVP';
-import Scene8Scripture from './scenes/Scene8Scripture';
-import Scene9ThankYou from './scenes/Scene9ThankYou';
-import Scene10Extras from './scenes/Scene10Extras';
+import Scene7Scripture from './scenes/Scene8Scripture';
+import Scene8ThankYou from './scenes/Scene9ThankYou';
+import Scene9Extras from './scenes/Scene10Extras';
+import Scene10RSVP from './scenes/Scene11RSVP';
 
 const scenes = [
   Scene1Envelope,
@@ -25,11 +25,14 @@ const scenes = [
   Scene4Venue,
   Scene5Schedule,
   Scene6DressCode,
-  Scene7RSVP,
-  Scene8Scripture,
-  Scene9ThankYou,
-  Scene10Extras,
+  Scene7Scripture,
+  Scene8ThankYou,
+  Scene9Extras,
+  Scene10RSVP,
 ];
+
+// Scenes that should not auto-advance (0-indexed)
+const noAutoAdvanceScenes = [0, 9]; // Scene1Envelope and Scene10RSVP
 
 interface WeddingStoryProps {
   onComplete?: () => void;
@@ -40,7 +43,6 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const progressRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartRef = useRef<number>(0);
 
@@ -64,18 +66,22 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
   // Auto-advance timer
   useEffect(() => {
-    if (!isPlaying || isPaused) return;
+    if (!isPlaying || noAutoAdvanceScenes.includes(currentScene)) return;
 
     const timer = setTimeout(() => {
       nextScene();
     }, 5000); // 5 seconds per scene
 
     return () => clearTimeout(timer);
-  }, [currentScene, isPlaying, isPaused, nextScene]);
+  }, [currentScene, isPlaying, nextScene]);
 
   // Progress bar animation
   useEffect(() => {
-    if (!isPlaying || isPaused) return;
+    if (!isPlaying || noAutoAdvanceScenes.includes(currentScene)) {
+      // For non-auto-advance scenes, set progress to 0 and don't animate
+      setProgress(0);
+      return;
+    }
 
     setProgress(0);
     const startTime = Date.now();
@@ -98,7 +104,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
         clearTimeout(progressRef.current);
       }
     };
-  }, [currentScene, isPlaying, isPaused]);
+  }, [currentScene, isPlaying]);
 
   // Audio control
   useEffect(() => {
@@ -129,7 +135,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     setIsPlaying(true);
   };
 
-  // Touch handlers for tap/hold
+  // Touch handlers for navigation
   const handleTouchStart = () => {
     touchStartRef.current = Date.now();
   };
@@ -141,13 +147,10 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     const tapX = touch.clientX;
 
     if (touchDuration < 200) { // Quick tap
-      if (tapX < screenWidth / 3) {
-        prevScene(); // Left third - previous
-      } else if (tapX > (screenWidth * 2) / 3) {
-        nextScene(); // Right third - next
+      if (tapX < screenWidth / 2) {
+        prevScene(); // Left half - previous
       } else {
-        // Middle third - pause/play
-        setIsPaused(!isPaused);
+        nextScene(); // Right half - next
       }
     }
   };
@@ -219,21 +222,15 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
           <CurrentSceneComponent 
             onNext={nextScene}
             onPrev={prevScene}
-            isActive={!isPaused}
+            isActive={true}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Pause indicator */}
-      {isPaused && (
-        <div className="absolute inset-0 bg-black/20 flex items-center justify-center z-40">
-          <div className="text-white text-6xl">⏸️</div>
-        </div>
-      )}
 
       {/* Navigation hints */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50 text-white/70 text-sm text-center">
-        <p>Tap sides to navigate • Hold center to pause • Swipe to change scenes</p>
+        <p>Tap sides to navigate • Swipe to change scenes</p>
       </div>
     </div>
   );

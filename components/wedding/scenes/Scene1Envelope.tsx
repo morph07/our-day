@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface SceneProps {
@@ -11,6 +11,11 @@ interface SceneProps {
 
 export default function Scene1Envelope({ onNext }: SceneProps) {
   const [isOpened, setIsOpened] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleEnvelopeClick = () => {
     setIsOpened(true);
@@ -19,33 +24,43 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
     }, 2000);
   };
 
+  // Generate consistent positions for petals
+  const petalPositions = Array.from({ length: 20 }, (_, i) => ({
+    initialX: (i * 37 + 123) % 400, // Deterministic but varied positions
+    finalX: (i * 43 + 89) % 400,
+    delay: (i * 0.1) % 2,
+    duration: 4 + (i % 3),
+  }));
+
   return (
     <div className="relative w-full h-full bg-gradient-to-br from-dusty-blue to-blue-300 overflow-hidden">
-      {/* Floating petals */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-white/20 rounded-full"
-            initial={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 400),
-              y: -10,
-              rotate: 0,
-            }}
-            animate={{
-              y: (typeof window !== 'undefined' ? window.innerHeight : 800) + 10,
-              rotate: 360,
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 400),
-            }}
-            transition={{
-              duration: Math.random() * 3 + 4,
-              repeat: Infinity,
-              ease: 'linear',
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
+      {/* Floating petals - only render after mount to avoid hydration mismatch */}
+      {isMounted && (
+        <div className="absolute inset-0">
+          {petalPositions.map((petal, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-white/20 rounded-full"
+              initial={{
+                x: petal.initialX,
+                y: -10,
+                rotate: 0,
+              }}
+              animate={{
+                y: (typeof window !== 'undefined' ? window.innerHeight : 800) + 10,
+                rotate: 360,
+                x: petal.finalX,
+              }}
+              transition={{
+                duration: petal.duration,
+                repeat: Infinity,
+                ease: 'linear',
+                delay: petal.delay,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Main content */}
       <div className="flex flex-col items-center justify-center h-full px-8 text-center">
