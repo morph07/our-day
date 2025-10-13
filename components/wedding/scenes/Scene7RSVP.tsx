@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,9 +25,21 @@ type RSVPFormData = z.infer<typeof rsvpSchema>;
 
 export default function Scene7RSVP({ isActive }: SceneProps) {
   const [showForm, setShowForm] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Generate consistent confetti positions
+  const confettiPositions = Array.from({ length: 30 }, (_, i) => ({
+    x: (i * 23 + 50) % 400,
+    y: (i * 31 + 100) % 600,
+    delay: (i * 0.05) % 0.5,
+  }));
 
   const {
     register,
@@ -105,30 +117,32 @@ export default function Scene7RSVP({ isActive }: SceneProps) {
             </p>
           </motion.div>
 
-          {/* Confetti animation */}
-          <div className="absolute inset-0 pointer-events-none">
-            {[...Array(30)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-dusty-blue rounded-full"
-                initial={{
-                  x: (typeof window !== 'undefined' ? window.innerWidth : 400) / 2,
-                  y: (typeof window !== 'undefined' ? window.innerHeight : 800) / 2,
-                  scale: 0,
-                }}
-                animate={{
-                  x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 400),
-                  y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-                  scale: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  ease: 'easeOut',
-                  delay: Math.random() * 0.5,
-                }}
-              />
-            ))}
-          </div>
+          {/* Confetti animation - only render after mount */}
+          {isMounted && (
+            <div className="absolute inset-0 pointer-events-none">
+              {confettiPositions.map((confetti, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-dusty-blue rounded-full"
+                  initial={{
+                    x: 200, // Center position
+                    y: 400, // Center position
+                    scale: 0,
+                  }}
+                  animate={{
+                    x: confetti.x,
+                    y: confetti.y,
+                    scale: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    ease: 'easeOut',
+                    delay: confetti.delay,
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     );

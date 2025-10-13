@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface SceneProps {
@@ -9,6 +10,21 @@ interface SceneProps {
 }
 
 export default function Scene2Blessing({ isActive }: SceneProps) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Generate consistent positions for floating elements
+  const floatingElements = Array.from({ length: 6 }, (_, i) => ({
+    x: (i * 67 + 50) % 400,
+    y: (i * 89 + 100) % 600,
+    duration: 4 + (i % 3),
+    delay: i * 0.3,
+    symbol: ['💙', '✨', '🌸', '💫', '🤍', '🌟'][i],
+  }));
+
   return (
     <div className="relative w-full h-full bg-gradient-to-b from-white to-beige overflow-hidden">
       {/* Watercolor border effect */}
@@ -86,32 +102,34 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
           </motion.div>
         </motion.div>
 
-        {/* Floating elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute text-dusty-blue/20 text-2xl"
-              initial={{
-                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 400),
-                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-                rotate: 0,
-              }}
-              animate={{
-                rotate: 360,
-                y: [0, -20, 0],
-              }}
-              transition={{
-                duration: 4 + Math.random() * 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: Math.random() * 2,
-              }}
-            >
-              ✨
-            </motion.div>
-          ))}
-        </div>
+        {/* Floating elements - only render after mount */}
+        {isMounted && (
+          <div className="absolute inset-0 pointer-events-none">
+            {floatingElements.map((element, i) => (
+              <motion.div
+                key={i}
+                className="absolute text-dusty-blue/20 text-2xl"
+                initial={{
+                  x: element.x,
+                  y: element.y,
+                  rotate: 0,
+                }}
+                animate={{
+                  rotate: 360,
+                  y: [element.y, element.y - 20, element.y],
+                }}
+                transition={{
+                  duration: element.duration,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: element.delay,
+                }}
+              >
+                {element.symbol}
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
