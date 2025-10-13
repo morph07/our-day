@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Koketso 💙 Neo - Wedding Invitation | 06 Dec 2025",
-  description: "Join us for our special day of love and celebration in Letsholathebe, Botswana. Interactive wedding invitation with all the details you need.",
+  description: "Join us for our special day of love and celebration in Letsholathebe village. Interactive wedding invitation with all the details you need.",
   keywords: ["wedding", "invitation", "Koketso", "Neo", "Botswana", "Letsholathebe", "December 2025"],
-  authors: [{ name: "Koketso & Neo" }],
+  authors: [{ name: "Koketso Morapedi" }],
   metadataBase: new URL('https://koketso-neo-wedding.netlify.app'),
   openGraph: {
     title: "Koketso 💙 Neo - Wedding Invitation",

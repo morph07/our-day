@@ -13,10 +13,10 @@ import Scene3DateTheme from './scenes/Scene3DateTheme';
 import Scene4Venue from './scenes/Scene4Venue';
 import Scene5Schedule from './scenes/Scene5Schedule';
 import Scene6DressCode from './scenes/Scene6DressCode';
-import Scene7RSVP from './scenes/Scene7RSVP';
-import Scene8Scripture from './scenes/Scene8Scripture';
-import Scene9ThankYou from './scenes/Scene9ThankYou';
-import Scene10Extras from './scenes/Scene10Extras';
+import Scene7Scripture from './scenes/Scene8Scripture';
+import Scene8ThankYou from './scenes/Scene9ThankYou';
+import Scene9Extras from './scenes/Scene10Extras';
+import Scene10RSVP from './scenes/Scene11RSVP';
 
 const scenes = [
   Scene1Envelope,
@@ -25,11 +25,14 @@ const scenes = [
   Scene4Venue,
   Scene5Schedule,
   Scene6DressCode,
-  Scene7RSVP,
-  Scene8Scripture,
-  Scene9ThankYou,
-  Scene10Extras,
+  Scene7Scripture,
+  Scene8ThankYou,
+  Scene9Extras,
+  Scene10RSVP,
 ];
+
+// Scenes that should not auto-advance (0-indexed)
+const noAutoAdvanceScenes = [0, 9]; // Scene1Envelope and Scene10RSVP
 
 interface WeddingStoryProps {
   onComplete?: () => void;
@@ -63,7 +66,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
   // Auto-advance timer
   useEffect(() => {
-    if (!isPlaying) return;
+    if (!isPlaying || noAutoAdvanceScenes.includes(currentScene)) return;
 
     const timer = setTimeout(() => {
       nextScene();
@@ -74,7 +77,11 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
   // Progress bar animation
   useEffect(() => {
-    if (!isPlaying) return;
+    if (!isPlaying || noAutoAdvanceScenes.includes(currentScene)) {
+      // For non-auto-advance scenes, set progress to 0 and don't animate
+      setProgress(0);
+      return;
+    }
 
     setProgress(0);
     const startTime = Date.now();
