@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Clock, Sun, Church, Users, Moon } from 'lucide-react';
+import { Clock, Sun, Church, Users, Moon, Calendar, Download } from 'lucide-react';
 
 interface SceneProps {
   onNext: () => void;
@@ -59,6 +59,60 @@ const scheduleItems: ScheduleItem[] = [
 ];
 
 export default function Scene3DateTheme({ isActive }: SceneProps) {
+  // Save the date functionality
+  const generateCalendarLink = (type: 'google' | 'outlook' | 'ics') => {
+    const eventDetails = {
+      title: 'Koketso & Morape Wedding',
+      startDate: '20251206T050000Z', // December 6, 2025, 5:00 AM UTC
+      endDate: '20251206T170000Z',   // December 6, 2025, 5:00 PM UTC
+      location: 'Letsholathebe, Botswana',
+      description: 'Join us for our special day filled with love, tradition, and celebration. Timeline: 5:00 AM - PATLO/MAGADI, 9:00 AM - Church Service, 11:00 AM - Reception, 5:00 PM - KGOROSO'
+    };
+
+    switch (type) {
+      case 'google':
+        return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventDetails.title)}&dates=${eventDetails.startDate}/${eventDetails.endDate}&location=${encodeURIComponent(eventDetails.location)}&details=${encodeURIComponent(eventDetails.description)}`;
+      
+      case 'outlook':
+        return `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(eventDetails.title)}&startdt=${eventDetails.startDate}&enddt=${eventDetails.endDate}&location=${encodeURIComponent(eventDetails.location)}&body=${encodeURIComponent(eventDetails.description)}`;
+      
+      case 'ics':
+        const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wedding//Wedding Event//EN
+BEGIN:VEVENT
+UID:wedding-${Date.now()}@ourday.com
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+DTSTART:${eventDetails.startDate}
+DTEND:${eventDetails.endDate}
+SUMMARY:${eventDetails.title}
+DESCRIPTION:${eventDetails.description}
+LOCATION:${eventDetails.location}
+END:VEVENT
+END:VCALENDAR`;
+        
+        const blob = new Blob([icsContent], { type: 'text/calendar' });
+        return URL.createObjectURL(blob);
+    }
+  };
+
+  const handleSaveDate = (type: 'google' | 'outlook' | 'ics') => {
+    const link = generateCalendarLink(type);
+    
+    if (type === 'ics') {
+      // For ICS, trigger download
+      const a = document.createElement('a');
+      a.href = link;
+      a.download = 'koketso-morape-wedding.ics';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(link);
+    } else {
+      // For Google and Outlook, open in new tab
+      window.open(link, '_blank');
+    }
+  };
   return (
     <motion.div 
       className="relative w-full h-full overflow-hidden"
@@ -91,6 +145,45 @@ export default function Scene3DateTheme({ isActive }: SceneProps) {
             <h2 className="typography-subheading text-gray-700 mb-1">December</h2>
             <div className="typography-formal text-2xl font-medium text-dusty-blue">2025</div>
           </div>
+
+          {/* Save the Date Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-6"
+          >
+            <div className="flex items-center justify-center mb-3">
+              <Calendar className="w-5 h-5 text-white mr-2" />
+              <span className="text-white font-medium">Save the Date</span>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-2">
+              <button
+                onClick={() => handleSaveDate('google')}
+                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 text-white text-sm font-medium transition-all duration-200 hover:scale-105 flex items-center gap-2"
+              >
+                <Calendar className="w-4 h-4" />
+                Google
+              </button>
+              
+              <button
+                onClick={() => handleSaveDate('outlook')}
+                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 text-white text-sm font-medium transition-all duration-200 hover:scale-105 flex items-center gap-2"
+              >
+                <Calendar className="w-4 h-4" />
+                Outlook
+              </button>
+              
+              <button
+                onClick={() => handleSaveDate('ics')}
+                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2 text-white text-sm font-medium transition-all duration-200 hover:scale-105 flex items-center gap-2"
+              >
+                <Download className="w-4 h-4" />
+                Download
+              </button>
+            </div>
+          </motion.div>
         </motion.div>
 
 
