@@ -10,8 +10,6 @@ import useSound from 'use-sound';
 import Scene1Envelope from './scenes/Scene1Envelope';
 import Scene2Blessing from './scenes/Scene2Blessing';
 import Scene3DateTheme from './scenes/Scene3DateTheme';
-import Scene4Venue from './scenes/Scene4Venue';
-import Scene5Schedule from './scenes/Scene5Schedule';
 import Scene6DressCode from './scenes/Scene6DressCode';
 import Scene7Scripture from './scenes/Scene8Scripture';
 import Scene8ThankYou from './scenes/Scene9ThankYou';
@@ -22,8 +20,6 @@ const scenes = [
   Scene1Envelope,
   Scene2Blessing,
   Scene3DateTheme,
-  Scene4Venue,
-  Scene5Schedule,
   Scene6DressCode,
   Scene7Scripture,
   Scene8ThankYou,
@@ -32,7 +28,7 @@ const scenes = [
 ];
 
 // Scenes that should not auto-advance (0-indexed)
-const noAutoAdvanceScenes = [0, 9]; // Scene1Envelope and Scene10RSVP
+const noAutoAdvanceScenes = [0, 7]; // Scene1Envelope and Scene10RSVP
 
 interface WeddingStoryProps {
   onComplete?: () => void;
