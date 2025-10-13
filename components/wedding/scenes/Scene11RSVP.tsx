@@ -48,7 +48,14 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
               transition={{ duration: 0.5 }}
               className="max-w-lg w-full"
             >
-              <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-purple-200">
+              <div 
+                className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-purple-200"
+                onClick={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                onTouchEnd={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
+                onMouseUp={(e) => e.stopPropagation()}
+              >
                 <div className="text-center mb-8">
                   <div className="text-5xl mb-4">💌</div>
                   <h3 className="text-3xl font-script text-purple-700 mb-2">
@@ -65,7 +72,13 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form 
+                  onSubmit={handleSubmit} 
+                  className="space-y-5"
+                  onClick={(e) => e.stopPropagation()}
+                  onTouchStart={(e) => e.stopPropagation()}
+                  onTouchEnd={(e) => e.stopPropagation()}
+                >
                   {/* Name */}
                   <div>
                     <label className="flex items-center text-sm font-serif text-gray-700 mb-2">

@@ -17,11 +17,16 @@ export default function Scene10Extras({ isActive }: SceneProps) {
     }
   };
 
-  // Placeholder engagement photos - in production, these would be real photos
+  // Real engagement photos from the images folder
   const engagementPhotos = [
-    { id: 1, alt: 'Koketso and Neo engagement photo 1' },
-    { id: 2, alt: 'Koketso and Neo engagement photo 2' },
-    { id: 3, alt: 'Koketso and Neo engagement photo 3' },
+    { id: 1, src: '/images/Proposal 1.JPG', alt: 'Koketso and Neo proposal moment 1', caption: 'The moment we knew...' },
+    { id: 2, src: '/images/Proposal 2.JPG', alt: 'Koketso and Neo proposal moment 2', caption: 'Love in every glance...' },
+    { id: 3, src: '/images/Proposal 3.JPG', alt: 'Koketso and Neo proposal moment 3', caption: 'Building our forever...' },
+    { id: 4, src: '/images/After Proposal Shoot.JPG', alt: 'After proposal celebration', caption: 'Celebrating our engagement...' },
+    { id: 5, src: '/images/IMG_0045.jpeg', alt: 'Koketso and Neo together', caption: 'Our love story continues...' },
+    { id: 6, src: '/images/IMG_0997.JPG', alt: 'Beautiful moment together', caption: 'Every moment is precious...' },
+    { id: 7, src: '/images/IMG_1733.JPG', alt: 'Koketso and Neo romantic moment', caption: 'Hearts intertwined...' },
+    { id: 8, src: '/images/IMG_9732.jpeg', alt: 'Koketso and Neo beautiful portrait', caption: 'Forever starts now...' },
   ];
 
   return (
@@ -37,7 +42,7 @@ export default function Scene10Extras({ isActive }: SceneProps) {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          className="max-w-md w-full"
+          className="max-w-4xl w-full"
         >
           {/* Header */}
           <motion.div
@@ -60,7 +65,7 @@ export default function Scene10Extras({ isActive }: SceneProps) {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mb-8"
           >
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {engagementPhotos.map((photo, index) => (
                 <motion.div
                   key={photo.id}
@@ -73,17 +78,14 @@ export default function Scene10Extras({ isActive }: SceneProps) {
                   }}
                   className="relative"
                 >
-                  {/* Placeholder for engagement photos */}
-                  <div className="w-full h-48 bg-gradient-to-br from-dusty-blue/20 to-beige/30 rounded-xl shadow-lg border border-dusty-blue/20 flex items-center justify-center">
-                    <div className="text-center text-dusty-blue/60">
-                      <Heart size={32} className="mx-auto mb-2" />
-                      <p className="text-sm font-serif">
-                        Engagement Photo {index + 1}
-                      </p>
-                      <p className="text-xs font-serif opacity-70 mt-1">
-                        {photo.alt}
-                      </p>
-                    </div>
+                  {/* Real engagement photos */}
+                  <div className="w-full h-48 md:h-56 rounded-xl shadow-lg border border-dusty-blue/20 overflow-hidden bg-white">
+                    <img 
+                      src={photo.src}
+                      alt={photo.alt}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
                   </div>
 
                   {/* Photo overlay text */}
@@ -94,9 +96,7 @@ export default function Scene10Extras({ isActive }: SceneProps) {
                     className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-3"
                   >
                     <p className="text-xs font-serif text-gray-600 italic text-center">
-                      {index === 0 && "The moment we knew..."}
-                      {index === 1 && "Love in every glance..."}
-                      {index === 2 && "Building our forever..."}
+                      {photo.caption}
                     </p>
                   </motion.div>
                 </motion.div>

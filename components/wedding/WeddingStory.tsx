@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSwipeable } from 'react-swipeable';
 import { Volume2, VolumeX, RotateCcw } from 'lucide-react';
-// import useSound from 'use-sound';
+import useSound from 'use-sound';
 
 // Import scene components
 import Scene1Envelope from './scenes/Scene1Envelope';
@@ -46,15 +46,17 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   const progressRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartRef = useRef<number>(0);
 
-  // Background music - placeholder for now, you can add an audio file to public/audio/
-  // const [play, { stop, pause, sound }] = useSound('/audio/wedding-music.mp3', {
-  //   loop: true,
-  //   volume: 0.3,
-  // });
-  
-  // Temporary placeholder functions until audio is added
-  const play = () => {};
-  const pause = () => {};
+  // Background music - add your wedding music file to public/audio/
+  const [play, { stop, pause, sound }] = useSound('/audio/wedding-music.mp3', {
+    loop: true,
+    volume: 0.3,
+    onload: () => {
+      console.log('Wedding music loaded successfully');
+    },
+    onloaderror: () => {
+      console.log('Could not load wedding music. Please add wedding-music.mp3 to public/audio/');
+    }
+  });
 
   const nextScene = useCallback(() => {
     if (currentScene < scenes.length - 1) {
@@ -70,7 +72,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
     const timer = setTimeout(() => {
       nextScene();
-    }, 5000); // 5 seconds per scene
+    }, 30000); // 30 seconds per scene
 
     return () => clearTimeout(timer);
   }, [currentScene, isPlaying, nextScene]);
@@ -85,7 +87,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
     setProgress(0);
     const startTime = Date.now();
-    const duration = 5000;
+    const duration = 30000;
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
@@ -115,9 +117,21 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     }
 
     return () => {
-      // Cleanup will be handled when audio is implemented
+      // Cleanup on component unmount
+      if (sound) {
+        stop();
+      }
     };
-  }, [isMuted, isPlaying]);
+  }, [isMuted, isPlaying, play, pause, sound, stop]);
+
+  // Cleanup on component unmount
+  useEffect(() => {
+    return () => {
+      if (sound) {
+        stop();
+      }
+    };
+  }, [sound, stop]);
 
 
   const prevScene = () => {
@@ -135,23 +149,50 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     setIsPlaying(true);
   };
 
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
   // Touch handlers for navigation
-  const handleTouchStart = () => {
+  const handleTouchStart = (e: React.TouchEvent) => {
     touchStartRef.current = Date.now();
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     const touchDuration = Date.now() - touchStartRef.current;
     const touch = e.changedTouches[0];
+    
+    if (!touch) return; // Safety check
+    
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400;
     const tapX = touch.clientX;
 
-    if (touchDuration < 200) { // Quick tap
+    // Quick tap detection (less than 300ms and minimal movement)
+    if (touchDuration < 300) {
+      console.log('Tap detected at:', tapX, 'Screen width:', screenWidth);
       if (tapX < screenWidth / 2) {
+        console.log('Previous scene');
         prevScene(); // Left half - previous
       } else {
+        console.log('Next scene');
         nextScene(); // Right half - next
       }
+    }
+  };
+
+  // Click handlers for desktop
+  const handleClick = (e: React.MouseEvent) => {
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400;
+    const clickX = e.clientX;
+    
+    if (clickX < screenWidth / 2) {
+      prevScene(); // Left half - previous
+    } else {
+      nextScene(); // Right half - next
     }
   };
 
@@ -171,6 +212,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
       {...swipeHandlers}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
+      onClick={handleClick}
     >
       {/* Progress bars */}
       <div className="absolute top-4 left-4 right-4 z-50 flex gap-1">
@@ -178,7 +220,10 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
           <div
             key={index}
             className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden cursor-pointer"
-            onClick={() => goToScene(index)}
+            onClick={(e) => {
+              e.stopPropagation();
+              goToScene(index);
+            }}
           >
             <div
               className="h-full bg-white transition-all duration-100 ease-linear"
@@ -193,8 +238,12 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
       {/* Audio control */}
       <button
-        onClick={() => setIsMuted(!isMuted)}
-        className="absolute top-4 right-4 z-50 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white"
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleMute();
+        }}
+        className="absolute top-4 right-4 z-50 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+        title={isMuted ? "Unmute music" : "Mute music"}
       >
         {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
       </button>
@@ -202,8 +251,11 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
       {/* Restart button (shown on last scene) */}
       {currentScene === scenes.length - 1 && (
         <button
-          onClick={restart}
-          className="absolute top-4 right-16 z-50 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white"
+          onClick={(e) => {
+            e.stopPropagation();
+            restart();
+          }}
+          className="absolute top-4 right-16 z-50 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
         >
           <RotateCcw size={20} />
         </button>
