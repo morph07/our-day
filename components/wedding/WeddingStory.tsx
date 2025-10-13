@@ -45,6 +45,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   const [progress, setProgress] = useState(0);
   const progressRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartRef = useRef<number>(0);
+  const lastInteractionRef = useRef<number>(0);
 
   // Background music - add your wedding music file to public/audio/
   const [play, { stop, pause, sound }] = useSound('/audio/wedding-music.mp3', {
@@ -163,17 +164,26 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    const touchDuration = Date.now() - touchStartRef.current;
+    const now = Date.now();
+    const touchDuration = now - touchStartRef.current;
     const touch = e.changedTouches[0];
     
     if (!touch) return; // Safety check
     
+    // Prevent double triggering within 500ms
+    if (now - lastInteractionRef.current < 500) {
+      console.log('Interaction too soon, ignoring');
+      return;
+    }
+    
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400;
     const tapX = touch.clientX;
 
-    // Quick tap detection (less than 300ms and minimal movement)
+    // Quick tap detection (less than 300ms)
     if (touchDuration < 300) {
       console.log('Tap detected at:', tapX, 'Screen width:', screenWidth);
+      lastInteractionRef.current = now;
+      
       if (tapX < screenWidth / 2) {
         console.log('Previous scene');
         prevScene(); // Left half - previous
@@ -186,8 +196,18 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
   // Click handlers for desktop
   const handleClick = (e: React.MouseEvent) => {
+    const now = Date.now();
+    
+    // Prevent double triggering within 500ms
+    if (now - lastInteractionRef.current < 500) {
+      console.log('Click too soon, ignoring');
+      return;
+    }
+    
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400;
     const clickX = e.clientX;
+    
+    lastInteractionRef.current = now;
     
     if (clickX < screenWidth / 2) {
       prevScene(); // Left half - previous
@@ -196,12 +216,36 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     }
   };
 
-  // Swipe handlers
+  // Swipe handlers with debouncing
+  const handleSwipeLeft = () => {
+    const now = Date.now();
+    if (now - lastInteractionRef.current < 500) {
+      console.log('Swipe left too soon, ignoring');
+      return;
+    }
+    lastInteractionRef.current = now;
+    console.log('Swipe left detected');
+    nextScene();
+  };
+
+  const handleSwipeRight = () => {
+    const now = Date.now();
+    if (now - lastInteractionRef.current < 500) {
+      console.log('Swipe right too soon, ignoring');
+      return;
+    }
+    lastInteractionRef.current = now;
+    console.log('Swipe right detected');
+    prevScene();
+  };
+
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: nextScene,
-    onSwipedRight: prevScene,
+    onSwipedLeft: handleSwipeLeft,
+    onSwipedRight: handleSwipeRight,
     preventScrollOnSwipe: true,
-    trackMouse: true,
+    trackMouse: false, // Disable mouse tracking to prevent conflicts
+    swipeDuration: 500,
+    touchEventOptions: { passive: false },
   });
 
   const CurrentSceneComponent = scenes[currentScene];

@@ -12,13 +12,20 @@ interface SceneProps {
 export default function Scene1Envelope({ onNext }: SceneProps) {
   const [isOpened, setIsOpened] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const handleEnvelopeClick = () => {
+  const handleEnvelopeClick = (e: React.MouseEvent | React.TouchEvent) => {
+    e.stopPropagation(); // Prevent event bubbling to parent container
+    
+    if (isProcessing || isOpened) return; // Prevent double clicks
+    
+    setIsProcessing(true);
     setIsOpened(true);
+    
     setTimeout(() => {
       onNext();
     }, 2000);
@@ -77,6 +84,7 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleEnvelopeClick}
+              onTouchEnd={handleEnvelopeClick}
             >
               <div className="w-64 h-40 bg-white rounded-lg shadow-2xl relative overflow-hidden">
                 {/* Envelope flap */}
