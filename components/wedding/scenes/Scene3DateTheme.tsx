@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Clock, Sun, Church, Users, Moon, Calendar, Download, Phone } from 'lucide-react';
+import { Clock, Sun, Church, Users, Moon, Calendar, Download, Phone, MapPin } from 'lucide-react';
 
 interface SceneProps {
   onNext: () => void;
@@ -24,8 +24,8 @@ const scheduleItems: ScheduleItem[] = [
     time: '5:00 AM',
     title: 'PATLO/ MAGADI',
     caption: 'The morning begins with unity and tradition',
-    location: 'Letsholathebe Family Home',
-    locationLink: 'https://maps.google.com/?q=Letsholathebe,Botswana',
+    location: 'Letsholathebe Family Home, North-east District',
+    locationLink: 'https://maps.google.com/?q=Letsholathebe,North-east+District,Botswana',
     icon: <Sun size={20} />,
     color: 'text-orange-500',
   },
@@ -33,8 +33,8 @@ const scheduleItems: ScheduleItem[] = [
     time: '9:00 AM',
     title: 'CHURCH SERVICE',
     caption: 'We gather before God to vow our forever',
-    location: 'Local Church, Letsholathebe',
-    locationLink: 'https://maps.google.com/?q=Church+Letsholathebe,Botswana',
+    location: 'Victory International Center, Masunga',
+    locationLink: 'https://maps.app.goo.gl/TUsSjNgi33JRmzjc9',
     icon: <Church size={20} />,
     color: 'text-dusty-blue',
   },
@@ -42,8 +42,8 @@ const scheduleItems: ScheduleItem[] = [
     time: '11:00 AM',
     title: 'RECEPTION',
     caption: 'Laughter, feasting, and celebration follow',
-    location: 'Reception Venue, Letsholathebe',
-    locationLink: 'https://maps.google.com/?q=Letsholathebe,Botswana',
+    location: 'JZ Mosojanes Farm Letsholathebe, Letsholathebe',
+    locationLink: 'https://maps.app.goo.gl/SSp5BuFvAFtmgj3SA',
     icon: <Users size={20} />,
     color: 'text-green-500',
   },
@@ -51,8 +51,8 @@ const scheduleItems: ScheduleItem[] = [
     time: '5:00 PM',
     title: 'KGOROSO',
     caption: 'Evening reflection and family fellowship',
-    location: 'Letsholathebe Community Hall',
-    locationLink: 'https://maps.google.com/?q=Letsholathebe+Community+Hall,Botswana',
+    location: 'Letsholathebe Community Hall, North-east District',
+    locationLink: 'https://maps.google.com/?q=Letsholathebe+Community+Hall,North-east+District,Botswana',
     icon: <Moon size={20} />,
     color: 'text-purple-500',
   },
@@ -65,7 +65,7 @@ export default function Scene3DateTheme({ isActive }: SceneProps) {
       title: 'Koketso Morapedi & Neo Letsholathebe Wedding',
       startDate: '20251206T050000Z', // December 6, 2025, 5:00 AM UTC
       endDate: '20251206T170000Z',   // December 6, 2025, 5:00 PM UTC
-      location: 'Letsholathebe, Botswana',
+      location: 'Letsholathebe, North-east District, Botswana',
       description: 'Join us for our special day filled with love, tradition, and celebration. Timeline: 5:00 AM - PATLO/MAGADI, 9:00 AM - Church Service, 11:00 AM - Reception, 5:00 PM - KGOROSO'
     };
 
@@ -145,6 +145,28 @@ END:VCALENDAR`;
             <h2 className="typography-subheading text-gray-700 mb-1">December</h2>
             <div className="typography-formal text-2xl font-medium text-dusty-blue">2025</div>
           </div>
+
+          {/* Location Display */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="mb-6"
+          >
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <MapPin className="w-5 h-5 text-white mr-2" />
+                </div>
+                <p className="typography-formal text-lg font-medium text-white">
+                  Letsholathebe
+                </p>
+                <p className="text-sm text-white/80 font-medium">
+                  North-east District, Botswana
+                </p>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Save the Date Section */}
           <motion.div
@@ -228,11 +250,22 @@ END:VCALENDAR`;
                       </h3>
                     </div>
                     
-                    {/* Event Title */}
-                    <div>
+                    {/* Event Title and Location Pin */}
+                    <div className="flex items-center justify-between">
                       <h4 className="typography-formal text-base font-medium text-white/95 uppercase tracking-wider">
                         {item.title}
                       </h4>
+                      
+                      {/* Location Pin for Church Service and Reception */}
+                      {(item.title === 'CHURCH SERVICE' || item.title === 'RECEPTION') && (
+                        <button
+                          onClick={() => window.open(item.locationLink, '_blank')}
+                          className="ml-3 p-1.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full transition-all duration-200 hover:scale-110 group"
+                          title={`Navigate to ${item.location}`}
+                        >
+                          <MapPin className="w-4 h-4 text-white group-hover:text-white/90" />
+                        </button>
+                      )}
                     </div>
                   </div>
                 </motion.div>
