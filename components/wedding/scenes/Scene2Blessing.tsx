@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 interface SceneProps {
   onNext: () => void;
@@ -84,16 +83,11 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
             className="mb-8"
           >
             <div className="mb-4 flex justify-center">
-              <div className="relative w-38 h-38">
-                <Image 
-                  src="/images/illustrations/hand-drawn-one-line-art-illustration copy.png" 
-                  alt="Decorative flower illustration"
-                  fill
-                  sizes="152px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
+              <img 
+                src="/images/illustrations/hand-drawn-one-line-art-illustration copy.png" 
+                alt="Decorative flower illustration"
+                className="w-38 h-38 object-contain"
+              />
             </div>
             <div className="w-24 h-px bg-dusty-blue mx-auto mb-4" />
           </motion.div>
@@ -106,7 +100,7 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
             className="space-y-6"
           >
             <p className="typography-body text-xl text-gray-700 leading-relaxed">
-             It is with great joy and love that as the Lepora & Letsholathebe families, we invite you to witness and celebrate the beginning of our forever.
+             It is with great joy and love that we invite you to witness and celebrate the beginning of our forever.
              As we exchange our vows and start a new chapter, your presense will mean the world to us.
             </p>
 
