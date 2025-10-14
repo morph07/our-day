@@ -158,18 +158,7 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
             transition={{ duration: 1, ease: 'easeOut' }}
             className="text-center text-white"
           >
-            {/* Opening animation with sparkles */}
-            <motion.div
-              className="text-6xl mb-8"
-              animate={{ 
-                scale: [1, 1.2, 1],
-                rotate: [0, 10, -10, 0] 
-              }}
-              transition={{ duration: 0.8, repeat: 3 }}
-            >
-              💖
-            </motion.div>
-            
+     
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
