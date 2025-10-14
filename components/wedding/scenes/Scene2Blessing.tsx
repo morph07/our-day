@@ -100,7 +100,7 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
             className="space-y-6"
           >
             <p className="typography-body text-xl text-gray-700 leading-relaxed">
-             It is with great joy and love that we invite you to witness and celebrate the beginning of our forever.
+             It is with great joy and love that the families of Lepora and Letsholathebe invite you to witness and celebrate the beginning of our forever.
              As we exchange our vows and start a new chapter, your presense will mean the world to us.
             </p>
 
