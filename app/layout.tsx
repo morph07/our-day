@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg", // You'll need to add this image
+        url: "/images/Proposal 2.JPG",
         width: 1200,
         height: 630,
         alt: "Koketso & Neo Wedding Invitation",
@@ -56,16 +56,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Great+Vibes&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
-        <script type="text/javascript"
-                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-        </script>
-        <script type="text/javascript">
-           {`(function(){
-              emailjs.init({
-                publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-              });
-           })();`}
-        </script>
+        <link rel="preload" as="image" href="/images/Proposal 1.JPG" />
+        <link rel="preload" as="image" href="/images/Proposal 2.JPG" />
+        <link rel="preload" as="image" href="/images/illustrations/hand-drawn-one-line-art-illustration copy.png" />
+        <link rel="preload" as="image" href="/images/illustrations/Married Couple Wedding.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

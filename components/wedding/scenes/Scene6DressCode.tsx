@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface SceneProps {
   onNext: () => void;
@@ -59,11 +60,16 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
             className="mb-8"
           >
             <div className="mb-4 flex justify-center">
-              <img 
-                src="/images/illustrations/Married Couple Wedding.png" 
-                alt="Decorative flower illustration"
-                className="w-42 h-42 object-contain"
-              />
+              <div className="relative w-42 h-42">
+                <Image 
+                  src="/images/illustrations/Married Couple Wedding.png" 
+                  alt="Decorative flower illustration"
+                  fill
+                  sizes="168px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </div>
             <h2 className="typography-heading text-dusty-blue mb-2">
               Dress Code & Theme
@@ -153,11 +159,15 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
                 transition={{ duration: 0.8, delay: 1.3 }}
                 className="text-center"
               >
-                <img 
-                  src="/images/Cloths/Bride Cloth.png" 
-                  alt="Bride Family Traditional Cloth"
-                  className="w-64 h-40 object-cover rounded-xl shadow-lg mb-4 mx-auto"
-                />
+                <div className="relative w-64 h-40 mx-auto mb-4">
+                  <Image 
+                    src="/images/Cloths/Bride Cloth.png" 
+                    alt="Bride Family Traditional Cloth"
+                    fill
+                    sizes="256px"
+                    className="object-cover rounded-xl shadow-lg"
+                  />
+                </div>
                 <h5 className="typography-formal text-lg font-semibold text-dusty-blue mb-2">
                   Bride's Family & Friends
                 </h5>
@@ -174,11 +184,15 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
                 transition={{ duration: 0.8, delay: 1.4 }}
                 className="text-center"
               >
-                <img 
-                  src="/images/Cloths/Groom Cloth.png" 
-                  alt="Groom Family Traditional Cloth"
-                  className="w-64 h-40 object-cover rounded-xl shadow-lg mb-4 mx-auto"
-                />
+                <div className="relative w-64 h-40 mx-auto mb-4">
+                  <Image 
+                    src="/images/Cloths/Groom Cloth.png" 
+                    alt="Groom Family Traditional Cloth"
+                    fill
+                    sizes="256px"
+                    className="object-cover rounded-xl shadow-lg"
+                  />
+                </div>
                 <h5 className="typography-formal text-lg font-semibold text-dusty-blue mb-2">
                   Groom's Family & Friends
                 </h5>
