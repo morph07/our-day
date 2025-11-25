@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useSwipeable } from 'react-swipeable';
-import { Volume2, VolumeX, RotateCcw } from 'lucide-react';
-import useSound from 'use-sound';
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useSwipeable } from "react-swipeable";
+import { Volume2, VolumeX, RotateCcw } from "lucide-react";
+import useSound from "use-sound";
 
 // Import scene components
-import Scene1Envelope from './scenes/Scene1Envelope';
-import Scene2Blessing from './scenes/Scene2Blessing';
-import Scene3DateTheme from './scenes/Scene3DateTheme';
-import Scene6DressCode from './scenes/Scene6DressCode';
-import Scene7Scripture from './scenes/Scene8Scripture';
-import Scene9Extras from './scenes/Scene10Extras';
-import Scene10RSVP from './scenes/Scene11RSVP';
+import Scene1Envelope from "./scenes/Scene1Envelope";
+import Scene2Blessing from "./scenes/Scene2Blessing";
+import Scene3DateTheme from "./scenes/Scene3DateTheme";
+import Scene6DressCode from "./scenes/Scene6DressCode";
+import Scene7Scripture from "./scenes/Scene8Scripture";
+import Scene9Extras from "./scenes/Scene10Extras";
+import Scene10RSVP from "./scenes/Scene11RSVP";
 
 const scenes = [
   Scene1Envelope,
@@ -44,25 +44,28 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   const [isAudioError, setIsAudioError] = useState(false);
 
   // Background music - add your wedding music file to public/audio/
-  const [play, { stop, pause, sound }] = useSound('/audio/wedding-music.mp3', {
+  const [play, { stop, pause, sound }] = useSound("/audio/wedding-music.mp3", {
     loop: true,
     volume: 0.3,
     preload: true, // Preload the audio file
     onload: () => {
-      console.log('Wedding music loaded successfully');
+      console.log("Wedding music loaded successfully");
       setIsAudioLoaded(true);
       setIsAudioError(false);
     },
     onloaderror: (error: any) => {
-      console.log('Could not load wedding music. Please add wedding-music.mp3 to public/audio/', error);
+      console.log(
+        "Could not load wedding music. Please add wedding-music.mp3 to public/audio/",
+        error
+      );
       setIsAudioLoaded(false);
       setIsAudioError(true);
-    }
+    },
   });
 
   const nextScene = useCallback(() => {
     if (currentScene < scenes.length - 1) {
-      setCurrentScene(prev => prev + 1);
+      setCurrentScene((prev) => prev + 1);
     } else if (onComplete) {
       onComplete();
     }
@@ -113,15 +116,18 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   // Audio control - only play when audio is loaded
   useEffect(() => {
     if (!isAudioLoaded || isAudioError) {
-      console.log('Audio not ready yet, waiting...', { isAudioLoaded, isAudioError });
+      console.log("Audio not ready yet, waiting...", {
+        isAudioLoaded,
+        isAudioError,
+      });
       return;
     }
 
     if (!isMuted && isPlaying) {
-      console.log('Starting music playback');
+      console.log("Starting music playback");
       play();
     } else {
-      console.log('Pausing music playback');
+      console.log("Pausing music playback");
       pause();
     }
 
@@ -131,12 +137,21 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
         stop();
       }
     };
-  }, [isMuted, isPlaying, isAudioLoaded, isAudioError, play, pause, sound, stop]);
+  }, [
+    isMuted,
+    isPlaying,
+    isAudioLoaded,
+    isAudioError,
+    play,
+    pause,
+    sound,
+    stop,
+  ]);
 
   // Auto-start music when loaded (if not muted)
   useEffect(() => {
     if (isAudioLoaded && !isMuted && isPlaying) {
-      console.log('Audio loaded, auto-starting music');
+      console.log("Audio loaded, auto-starting music");
       play();
     }
   }, [isAudioLoaded, isMuted, isPlaying, play]);
@@ -150,10 +165,9 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     };
   }, [sound, stop]);
 
-
   const prevScene = () => {
     if (currentScene > 0) {
-      setCurrentScene(prev => prev - 1);
+      setCurrentScene((prev) => prev - 1);
     }
   };
 
@@ -183,28 +197,28 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
     const now = Date.now();
     const touchDuration = now - touchStartRef.current;
     const touch = e.changedTouches[0];
-    
+
     if (!touch) return; // Safety check
-    
+
     // Prevent double triggering within 500ms
     if (now - lastInteractionRef.current < 500) {
-      console.log('Interaction too soon, ignoring');
+      console.log("Interaction too soon, ignoring");
       return;
     }
-    
-    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400;
+
+    const screenWidth = typeof window !== "undefined" ? window.innerWidth : 400;
     const tapX = touch.clientX;
 
     // Quick tap detection (less than 300ms)
     if (touchDuration < 300) {
-      console.log('Tap detected at:', tapX, 'Screen width:', screenWidth);
+      console.log("Tap detected at:", tapX, "Screen width:", screenWidth);
       lastInteractionRef.current = now;
-      
+
       if (tapX < screenWidth / 2) {
-        console.log('Previous scene');
+        console.log("Previous scene");
         prevScene(); // Left half - previous
       } else {
-        console.log('Next scene');
+        console.log("Next scene");
         nextScene(); // Right half - next
       }
     }
@@ -213,18 +227,18 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   // Click handlers for desktop
   const handleClick = (e: React.MouseEvent) => {
     const now = Date.now();
-    
+
     // Prevent double triggering within 500ms
     if (now - lastInteractionRef.current < 500) {
-      console.log('Click too soon, ignoring');
+      console.log("Click too soon, ignoring");
       return;
     }
-    
-    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 400;
+
+    const screenWidth = typeof window !== "undefined" ? window.innerWidth : 400;
     const clickX = e.clientX;
-    
+
     lastInteractionRef.current = now;
-    
+
     if (clickX < screenWidth / 2) {
       prevScene(); // Left half - previous
     } else {
@@ -236,22 +250,22 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   const handleSwipeLeft = () => {
     const now = Date.now();
     if (now - lastInteractionRef.current < 500) {
-      console.log('Swipe left too soon, ignoring');
+      console.log("Swipe left too soon, ignoring");
       return;
     }
     lastInteractionRef.current = now;
-    console.log('Swipe left detected');
+    console.log("Swipe left detected");
     nextScene();
   };
 
   const handleSwipeRight = () => {
     const now = Date.now();
     if (now - lastInteractionRef.current < 500) {
-      console.log('Swipe right too soon, ignoring');
+      console.log("Swipe right too soon, ignoring");
       return;
     }
     lastInteractionRef.current = now;
-    console.log('Swipe right detected');
+    console.log("Swipe right detected");
     prevScene();
   };
 
@@ -267,7 +281,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   const CurrentSceneComponent = scenes[currentScene];
 
   return (
-    <div 
+    <div
       className="relative w-full h-screen bg-black overflow-hidden"
       {...swipeHandlers}
       onTouchStart={handleTouchStart}
@@ -288,8 +302,12 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
             <div
               className="h-full bg-white transition-all duration-100 ease-linear"
               style={{
-                width: index < currentScene ? '100%' : 
-                       index === currentScene ? `${progress}%` : '0%'
+                width:
+                  index < currentScene
+                    ? "100%"
+                    : index === currentScene
+                    ? `${progress}%`
+                    : "0%",
               }}
             />
           </div>
@@ -304,9 +322,13 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
         }}
         className="absolute top-4 right-4 z-50 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
         title={
-          !isAudioLoaded && !isAudioError ? "Loading music..." :
-          isAudioError ? "Music failed to load" :
-          isMuted ? "Unmute music" : "Mute music"
+          !isAudioLoaded && !isAudioError
+            ? "Loading music..."
+            : isAudioError
+            ? "Music failed to load"
+            : isMuted
+            ? "Unmute music"
+            : "Mute music"
         }
       >
         {!isAudioLoaded && !isAudioError ? (
@@ -344,10 +366,10 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
           className="w-full h-full"
         >
-          <CurrentSceneComponent 
+          <CurrentSceneComponent
             onNext={nextScene}
             onPrev={prevScene}
             isActive={true}
@@ -355,10 +377,11 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
         </motion.div>
       </AnimatePresence>
 
-
       {/* Navigation hints */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50 text-white/70 text-sm text-center">
-        <p className="font-body">Tap sides to navigate • Swipe to change scenes</p>
+        <p className="font-body">
+          Tap sides to navigate • Swipe to change scenes
+        </p>
       </div>
     </div>
   );

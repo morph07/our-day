@@ -1,0 +1,47 @@
+{
+  "title": "Aouie and Elisha Wedding Invitation",
+  "short_title": "Aouie & Elisha",
+  "description": "Join us for our special day of love and celebration. Interactive wedding invitation with all the details you need.",
+  "keywords": ["wedding", "invitation", "Aouie", "Elisha", "celebration"],
+  "authors": [
+    {
+      "name": "Lamberto Guevarra",
+      "url": "https://ambet.gomicro.biz"
+    }
+  ],
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Aouie and Elisha Wedding Invitation",
+    "description": "Join us for our special day - 14 February 2026"
+  },
+  "date": "14 February 2026",
+  "location": {
+    "venue": "Sunset Gardens",
+    "address": "1234 Blossom Lane, Springfield, IL"
+  },
+  "schedule": {
+    "ceremony": {
+      "time": "4:00 PM",
+      "details": "Outdoor ceremony in the garden area."
+    },
+    "reception": {
+      "time": "6:00 PM",
+      "details": "Dinner and dancing in the main hall."
+    }
+  },
+  "rsvp": {
+    "deadline": "2024-08-15",
+    "link": "http://example.com/rsvp"
+  },
+  "accommodations": {
+    "hotel": {
+      "name": "Springfield Inn",
+      "address": "5678 Comfort St, Springfield, IL",
+      "phone": "(555) 123-4567",
+      "discount_code": "AOUWED2024"
+    }
+  },
+  "registry": {
+    "link": "http://example.com/registry"
+  }
+}
