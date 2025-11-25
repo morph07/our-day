@@ -75,9 +75,12 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
   useEffect(() => {
     if (!isPlaying || noAutoAdvanceScenes.includes(currentScene)) return;
 
-    const timer = setTimeout(() => {
-      nextScene();
-    }, 30000); // 30 seconds per scene
+    const timer = setTimeout(
+      () => {
+        nextScene();
+      },
+      currentScene === 4 ? 60000 : 30000
+    ); // 30 seconds per scene
 
     return () => clearTimeout(timer);
   }, [currentScene, isPlaying, nextScene]);
@@ -92,7 +95,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
     setProgress(0);
     const startTime = Date.now();
-    const duration = 30000;
+    const duration = currentScene === 4 ? 60000 : 30000;
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;

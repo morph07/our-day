@@ -26,15 +26,36 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
   }));
 
   const colorSwatches = [
-    { name: "Dusty Blue", color: "#A3BFD9", textColor: "text-white" },
     {
-      name: "Pure White",
-      color: "#FFFFFF",
+      name: "Dark Slate Blue",
+      color: "#214662",
       textColor: "text-gray-700",
       border: true,
     },
-    { name: "Silver", color: "#C5C6C7", textColor: "text-gray-700" },
-    { name: "Soft Beige", color: "#EAE6E1", textColor: "text-gray-700" },
+    {
+      name: "Dusty Blue",
+      color: "#7393b3",
+      textColor: "text-gray-700",
+      border: true,
+    },
+    {
+      name: "Baby Blue",
+      color: "#a7c7e7",
+      textColor: "text-gray-700",
+      border: true,
+    },
+    {
+      name: "Light Gray",
+      color: "#d3d3d3",
+      textColor: "text-gray-700",
+      border: true,
+    },
+    {
+      name: "Cream",
+      color: "#f8f5f1",
+      textColor: "text-gray-700",
+      border: true,
+    },
   ];
 
   return (
@@ -89,30 +110,26 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
               <p className="typography-body text-dusty-blue mb-2">
                 Dusty Blue & White
               </p>
-              <p className="typography-caption text-gray-600 italic mb-6">
-                Timeless Grace
-              </p>
-
               {/* Theme color swatches */}
               <div className="flex justify-center space-x-4 mb-6">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-dusty-blue shadow-lg border-2 border-white" />
-                  <span className="text-xs font-body text-gray-600 mt-2">
-                    Dusty Blue
-                  </span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-white shadow-lg border-2 border-dusty-blue/30" />
-                  <span className="text-xs font-body text-gray-600 mt-2">
-                    Pure White
-                  </span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-silver shadow-lg border-2 border-white" />
-                  <span className="text-xs font-body text-gray-600 mt-2">
-                    Silver
-                  </span>
-                </div>
+                {colorSwatches.map((swatch) => (
+                  <div
+                    key={swatch.name}
+                    className={`flex flex-col items-center`}
+                  >
+                    <div
+                      className={`w-12 h-12 rounded-full shadow-lg ${
+                        swatch.border ? "border-2 border-white" : ""
+                      }`}
+                      style={{ backgroundColor: swatch.color }}
+                    />
+                    <span
+                      className={`text-xs font-body mt-2 ${swatch.textColor}`}
+                    >
+                      {swatch.name}
+                    </span>
+                  </div>
+                ))}
               </div>
 
               <div className="w-16 h-px bg-dusty-blue mx-auto mb-6" />
@@ -141,7 +158,7 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
                   transition={{ duration: 0.6, delay: 1.0 }}
                   className="typography-body text-dusty-blue mb-2"
                 >
-                  Matsela
+                  Formal
                 </motion.p>
                 <motion.div
                   initial={{ width: 0 }}
@@ -149,59 +166,6 @@ export default function Scene6DressCode({ isActive }: SceneProps) {
                   transition={{ duration: 0.8, delay: 1.1 }}
                   className="h-px bg-dusty-blue mx-auto mb-4"
                 />
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 1.2 }}
-                  className="typography-body text-gray-600 text-sm italic"
-                >
-                  Traditional fabrics for our families
-                </motion.p>
-              </div>
-
-              {/* Cloth Images Display */}
-              <div className="flex flex-col items-center space-y-8">
-                {/* Bride's Side */}
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 1.3 }}
-                  className="text-center"
-                >
-                  <img
-                    src="/images/Cloths/Bride Cloth.png"
-                    alt="Bride Family Traditional Cloth"
-                    className="w-64 h-40 object-cover rounded-xl shadow-lg mb-4 mx-auto"
-                  />
-                  <h5 className="typography-formal text-lg font-semibold text-dusty-blue mb-2">
-                    Bride's Family & Friends
-                  </h5>
-                  <div className="w-12 h-px bg-dusty-blue mx-auto mb-2" />
-                  <p className="typography-caption text-dusty-blue text-sm">
-                    For the bride's side
-                  </p>
-                </motion.div>
-
-                {/* Groom's Side */}
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 1.4 }}
-                  className="text-center"
-                >
-                  <img
-                    src="/images/Cloths/Groom Cloth.png"
-                    alt="Groom Family Traditional Cloth"
-                    className="w-64 h-40 object-cover rounded-xl shadow-lg mb-4 mx-auto"
-                  />
-                  <h5 className="typography-formal text-lg font-semibold text-dusty-blue mb-2">
-                    Groom's Family & Friends
-                  </h5>
-                  <div className="w-12 h-px bg-dusty-blue mx-auto mb-2" />
-                  <p className="typography-caption text-dusty-blue text-sm">
-                    For the groom's side
-                  </p>
-                </motion.div>
               </div>
             </motion.div>
 

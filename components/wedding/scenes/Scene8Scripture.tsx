@@ -43,8 +43,11 @@ export default function Scene8Scripture({ isActive }: SceneProps) {
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.7 }}
             >
-              <p className="text-md font-serif text-white leading-relaxed italic">
-                <strong>Bunga Ng Panata</strong> <br />
+              <p className="text-[10px] md:text-[16px] font-mono text-white leading-relaxed italic">
+                <span className="text-lg">
+                  <strong>Bunga Ng Panata</strong>
+                </span>{" "}
+                <br />
                 <br /> Habang binibigkis tali ng pag-ibig, <br /> Di na
                 mapigilan luhang nangingilid; <br /> Sa aking gunita'y muli na
                 nagbalik, <br /> Noong naghihintay sa sagot ng langit.   <br />{" "}
@@ -70,7 +73,6 @@ export default function Scene8Scripture({ isActive }: SceneProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="pt-4"
             >
               <div className="w-24 h-px bg-white/50 mx-auto mb-4" />
               <p className="text-sm font-serif font-medium text-white">
