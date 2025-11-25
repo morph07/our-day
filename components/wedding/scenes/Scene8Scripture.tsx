@@ -43,7 +43,7 @@ export default function Scene8Scripture({ isActive }: SceneProps) {
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.7 }}
             >
-              <p className="text-[10px] md:text-[16px] font-mono text-white leading-relaxed italic">
+              <p className="text-[11px] md:text-[16px] font-mono text-white leading-relaxed italic">
                 <span className="text-lg">
                   <strong>Bunga Ng Panata</strong>
                 </span>{" "}
