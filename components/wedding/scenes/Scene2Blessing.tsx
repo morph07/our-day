@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import data from "@/data/data.json";
 
 interface SceneProps {
   onNext: () => void;
@@ -15,7 +16,7 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   });
 
   useEffect(() => {
@@ -24,8 +25,8 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
 
   // Countdown timer effect
   useEffect(() => {
-    const weddingDate = new Date('2025-12-06T00:00:00').getTime();
-    
+    const weddingDate = new Date(data.date_time_start).getTime();
+
     const updateTimer = () => {
       const now = new Date().getTime();
       const distance = weddingDate - now;
@@ -33,9 +34,11 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
       if (distance > 0) {
         setTimeLeft({
           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          hours: Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          ),
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((distance % (1000 * 60)) / 1000)
+          seconds: Math.floor((distance % (1000 * 60)) / 1000),
         });
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -54,7 +57,7 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
     y: (i * 89 + 100) % 600,
     duration: 4 + (i % 3),
     delay: i * 0.3,
-    symbol: ['💙', '✨', '🌸', '💫', '🤍', '🌟'][i],
+    symbol: ["💙", "✨", "🌸", "💫", "🤍", "🌟"][i],
   }));
 
   return (
@@ -72,19 +75,19 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
+          transition={{ duration: 1, ease: "easeOut" }}
           className="max-w-md"
         >
           {/* Decorative element */}
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
             className="mb-8"
           >
             <div className="mb-4 flex justify-center">
-              <img 
-                src="/images/illustrations/hand-drawn-one-line-art-illustration copy.png" 
+              <img
+                src="/images/illustrations/hand-drawn-one-line-art-illustration copy.png"
                 alt="Decorative flower illustration"
                 className="w-38 h-38 object-contain"
               />
@@ -100,8 +103,7 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
             className="space-y-6"
           >
             <p className="typography-body text-xl text-gray-700 leading-relaxed">
-             It is with great joy and love that the families of Lepora and Letsholathebe invite you to witness and celebrate the beginning of our forever.
-             As we exchange our vows and start a new chapter, your presense will mean the world to us.
+              {data.short_message}
             </p>
 
             {/* Setswana greeting */}
@@ -112,28 +114,31 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
               className="border-t border-b border-dusty-blue/30 py-4 my-6"
             >
               <p className="typography-body italic text-dusty-blue">
-                Rea go laletsa lona mo lenyalong la rona.
+                {data.invite_message}
               </p>
-       
             </motion.div>
 
             {/* Initials with heart */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 1, delay: 1.5, ease: 'easeOut' }}
+              transition={{ duration: 1, delay: 1.5, ease: "easeOut" }}
               className="text-center"
             >
               <div className="inline-flex items-center space-x-3 text-3xl font-script text-dusty-blue">
-                <span>K</span>
+                <span>A</span>
                 <motion.span
                   animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                   className="text-red-400"
                 >
                   💙
                 </motion.span>
-                <span>N</span>
+                <span>E</span>
               </div>
             </motion.div>
 
@@ -144,39 +149,53 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
               transition={{ duration: 0.8, delay: 2.0 }}
               className="text-center mt-8"
             >
-              <h3 className="typography-formal text-lg text-gray-600 mb-4">SEE YOU IN</h3>
+              <h3 className="typography-formal text-lg text-gray-600 mb-4">
+                SEE YOU IN
+              </h3>
               <div className="grid grid-cols-4 gap-4 max-w-sm mx-auto">
-                <motion.div 
+                <motion.div
                   className="bg-white/80 rounded-lg p-3 shadow-sm border border-dusty-blue/20"
                   animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 1, repeat: Infinity, delay: 0 }}
                 >
-                  <div className="typography-heading text-2xl text-dusty-blue">{timeLeft.days}</div>
+                  <div className="typography-heading text-2xl text-dusty-blue">
+                    {timeLeft.days}
+                  </div>
                   <div className="typography-caption text-gray-600">Days</div>
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="bg-white/80 rounded-lg p-3 shadow-sm border border-dusty-blue/20"
                   animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 1, repeat: Infinity, delay: 0.25 }}
                 >
-                  <div className="typography-heading text-2xl text-dusty-blue">{timeLeft.hours}</div>
+                  <div className="typography-heading text-2xl text-dusty-blue">
+                    {timeLeft.hours}
+                  </div>
                   <div className="typography-caption text-gray-600">Hours</div>
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="bg-white/80 rounded-lg p-3 shadow-sm border border-dusty-blue/20"
                   animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 1, repeat: Infinity, delay: 0.5 }}
                 >
-                  <div className="typography-heading text-2xl text-dusty-blue">{timeLeft.minutes}</div>
-                  <div className="typography-caption text-gray-600">Minutes</div>
+                  <div className="typography-heading text-2xl text-dusty-blue">
+                    {timeLeft.minutes}
+                  </div>
+                  <div className="typography-caption text-gray-600">
+                    Minutes
+                  </div>
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="bg-white/80 rounded-lg p-3 shadow-sm border border-dusty-blue/20"
                   animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 1, repeat: Infinity, delay: 0.75 }}
                 >
-                  <div className="typography-heading text-2xl text-dusty-blue">{timeLeft.seconds}</div>
-                  <div className="typography-caption text-gray-600">Seconds</div>
+                  <div className="typography-heading text-2xl text-dusty-blue">
+                    {timeLeft.seconds}
+                  </div>
+                  <div className="typography-caption text-gray-600">
+                    Seconds
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
@@ -202,7 +221,7 @@ export default function Scene2Blessing({ isActive }: SceneProps) {
                 transition={{
                   duration: element.duration,
                   repeat: Infinity,
-                  ease: 'easeInOut',
+                  ease: "easeInOut",
                   delay: element.delay,
                 }}
               >

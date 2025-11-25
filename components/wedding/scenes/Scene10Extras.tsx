@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { RotateCcw, Heart } from 'lucide-react';
-import Image from 'next/image';
+import { motion } from "framer-motion";
+import { RotateCcw, Heart } from "lucide-react";
+import Image from "next/image";
 
 interface SceneProps {
   onNext: () => void;
@@ -15,31 +15,94 @@ interface PhotoItem {
   src: string;
   alt: string;
   caption?: string;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
 }
 
 export default function Scene10Extras({ isActive }: SceneProps) {
   // Static engagement photos
   const photos: PhotoItem[] = [
-    { id: '1', src: '/images/After Proposal Shoot.JPG', alt: 'After proposal celebration', caption: 'Celebrating our engagement...', size: 'large' },
-    { id: '2', src: '/images/Hilton Gardens Date.jpeg', alt: 'Hilton Gardens romantic date', caption: 'A perfect evening together...', size: 'medium' },
-    { id: '3', src: '/images/Party Date.jpeg', alt: 'Party date night', caption: 'Dancing through life...', size: 'small' },
-    { id: '4', src: '/images/Proposal 1.JPG', alt: 'Koketso and Neo proposal moment 1', caption: 'The moment we knew...', size: 'medium' },
-    { id: '5', src: '/images/Proposal 2.JPG', alt: 'Koketso and Neo proposal moment 2', caption: 'Love in every glance...', size: 'large' },
-    { id: '6', src: '/images/Proposal 3.JPG', alt: 'Koketso and Neo proposal moment 3', caption: 'Building our forever...', size: 'small' },
-    { id: '7', src: '/images/Proposal 4.JPG', alt: 'Koketso and Neo proposal moment 4', caption: 'Our hearts united...', size: 'medium' },
-    { id: '8', src: '/images/Proposal Kiss.JPG', alt: 'The proposal kiss', caption: 'Sealed with a kiss...', size: 'large' },
-    { id: '9', src: '/images/Quad Bike Date.jpeg', alt: 'Adventure quad bike date', caption: 'Adventures together...', size: 'small' },
-    { id: '10', src: '/images/Swakopmund Beach.jpeg', alt: 'Swakopmund beach memories', caption: 'Beach walks and dreams...', size: 'medium' },
-    { id: '11', src: '/images/Swakopmund Trip.jpeg', alt: 'Swakopmund trip adventure', caption: 'Exploring new places...', size: 'large' },
-    { id: '12', src: '/images/Table52 2.jpeg', alt: 'Table52 dinner date', caption: 'Fine dining and romance...', size: 'small' },
-    { id: '13', src: '/images/Table52 Date.jpeg', alt: 'Table52 romantic evening', caption: 'Candlelit conversations...', size: 'medium' },
-    { id: '14', src: '/images/Wedding Pose.JPG', alt: 'Wedding pose preview', caption: 'Practice makes perfect...', size: 'large' }
+    {
+      id: "1",
+      src: "/images/journey/IMG_1025.jpg",
+      alt: "After proposal celebration",
+      caption: "Celebrating our engagement...",
+      size: "medium",
+    },
+    {
+      id: "2",
+      src: "/images/journey/IMG_6045.jpg",
+      alt: "Hilton Gardens romantic date",
+      caption: "A perfect evening together...",
+      size: "large",
+    },
+    {
+      id: "3",
+      src: "/images/journey/IMG_6164.jpg",
+      alt: "Party date night",
+      caption: "Dancing through life...",
+      size: "large",
+    },
+    {
+      id: "4",
+      src: "/images/journey/IMG_6681.jpg",
+      alt: "Koketso and Neo proposal moment 1",
+      caption: "The moment we knew...",
+      size: "medium",
+    },
+    {
+      id: "5",
+      src: "/images/journey/IMG_6698.jpg",
+      alt: "Koketso and Neo proposal moment 2",
+      caption: "Love in every glance...",
+      size: "small",
+    },
+    {
+      id: "6",
+      src: "/images/journey/IMG_6746.jpg",
+      alt: "Koketso and Neo proposal moment 3",
+      caption: "Building our forever...",
+      size: "large",
+    },
+    {
+      id: "7",
+      src: "/images/journey/IMG_6752.jpg",
+      alt: "Koketso and Neo proposal moment 4",
+      caption: "Our hearts united...",
+      size: "large",
+    },
+    {
+      id: "8",
+      src: "/images/journey/IMG_6762.jpg",
+      alt: "The proposal kiss",
+      caption: "Sealed with a kiss...",
+      size: "large",
+    },
+    {
+      id: "9",
+      src: "/images/journey/IMG_6783.jpg",
+      alt: "Adventure quad bike date",
+      caption: "Adventures together...",
+      size: "small",
+    },
+    {
+      id: "10",
+      src: "/images/journey/IMG_6877.jpg",
+      alt: "Swakopmund beach memories",
+      caption: "Beach walks and dreams...",
+      size: "medium",
+    },
+    {
+      id: "11",
+      src: "/images/journey/IMG_6893.jpg",
+      alt: "Swakopmund trip adventure",
+      caption: "Exploring new places...",
+      size: "large",
+    },
   ];
 
   const replayStory = () => {
     // This will be handled by the parent WeddingStory component
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.location.reload();
     }
   };
@@ -56,14 +119,14 @@ export default function Scene10Extras({ isActive }: SceneProps) {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
+          transition={{ duration: 1, ease: "easeOut" }}
           className="max-w-7xl w-full"
         >
           {/* Header */}
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="text-center mb-8"
           >
             <h2 className="text-2xl font-decorative text-dusty-blue mb-2">
@@ -85,18 +148,26 @@ export default function Scene10Extras({ isActive }: SceneProps) {
                   key={photo.id}
                   initial={{ opacity: 0, scale: 0.8, y: 50 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.6, 
+                  transition={{
+                    duration: 0.6,
                     delay: 0.1 * index,
-                    ease: 'easeOut' 
+                    ease: "easeOut",
                   }}
                   className="relative group break-inside-avoid mb-4"
                 >
-                  <div className={`
+                  <div
+                    className={`
                     relative rounded-xl shadow-lg border border-dusty-blue/20 overflow-hidden bg-white
-                    ${photo.size === 'small' ? 'h-48' : photo.size === 'medium' ? 'h-64' : 'h-80'}
-                  `}>
-                    <Image 
+                    ${
+                      photo.size === "small"
+                        ? "h-48"
+                        : photo.size === "medium"
+                        ? "h-64"
+                        : "h-[28rem]"
+                    }
+                  `}
+                  >
+                    <Image
                       src={photo.src}
                       alt={photo.alt}
                       fill
@@ -125,8 +196,6 @@ export default function Scene10Extras({ isActive }: SceneProps) {
               ))}
             </div>
           </motion.div>
-
-
         </motion.div>
 
         {/* Floating celebration elements */}
@@ -147,11 +216,11 @@ export default function Scene10Extras({ isActive }: SceneProps) {
               transition={{
                 duration: 8 + Math.random() * 4,
                 repeat: Infinity,
-                ease: 'easeInOut',
+                ease: "easeInOut",
                 delay: Math.random() * 4,
               }}
             >
-              {['🎊', '🎉', '💫', '⭐', '💝'][Math.floor(Math.random() * 5)]}
+              {["🎊", "🎉", "💫", "⭐", "💝"][Math.floor(Math.random() * 5)]}
             </motion.div>
           ))}
         </div>

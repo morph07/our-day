@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface SceneProps {
   onNext: () => void;
@@ -9,8 +9,6 @@ interface SceneProps {
 }
 
 export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
-
-
   return (
     <div className="relative w-full h-full bg-gradient-to-b from-white to-beige">
       {/* Watercolor border effect (consistent with other scenes) */}
@@ -24,53 +22,53 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
       {/* Main content */}
       <div className="relative z-10 h-full overflow-y-auto">
         <div className="flex flex-col items-center justify-start min-h-full px-6 py-8 text-center">
-        {/* Google Forms RSVP */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="max-w-2xl w-full mt-8 mb-8"
-        >
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-dusty-blue/20">
-            <div className="text-center mb-8">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-4xl mb-4"
-              >
-                💌
-              </motion.div>
-              <h3 className="typography-heading text-dusty-blue mb-2">
-                Please RSVP
-              </h3>
-              <div className="w-16 h-px bg-dusty-blue mx-auto mb-4" />
-              <p className="typography-body text-gray-600">
-                Your presence would make our special day complete
-              </p>
-              <div className="bg-dusty-blue/10 rounded-xl p-4 mt-4">
-                <p className="typography-caption text-dusty-blue font-medium">
-                  Please respond by 01 December 2025
+          {/* Google Forms RSVP */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="max-w-2xl w-full mt-8 mb-8"
+          >
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-dusty-blue/20">
+              <div className="text-center mb-8">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="text-4xl mb-4"
+                >
+                  💌
+                </motion.div>
+                <h3 className="typography-heading text-dusty-blue mb-2">
+                  Please RSVP
+                </h3>
+                <div className="w-16 h-px bg-dusty-blue mx-auto mb-4" />
+                <p className="typography-body text-gray-600">
+                  Your presence would make our special day complete
                 </p>
+                <div className="bg-dusty-blue/10 rounded-xl p-4 mt-4">
+                  <p className="typography-caption text-dusty-blue font-medium">
+                    Please respond by 01 January 2026
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-xl overflow-hidden border border-dusty-blue/10">
+                <iframe
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSepvgmnNNdsk_HiRdGkFQARoEk9gOSESPf9gOt0O094x88T4A/viewform?usp=publish-editor"
+                  width="100%"
+                  height="967"
+                  frameBorder="0"
+                  marginHeight={0}
+                  marginWidth={0}
+                  className="w-full"
+                  title="Wedding RSVP Form"
+                >
+                  Loading…
+                </iframe>
               </div>
             </div>
-            
-            <div className="rounded-xl overflow-hidden border border-dusty-blue/10">
-              <iframe 
-                src="https://docs.google.com/forms/d/e/1FAIpQLScsIlBNUBztjkgNsHn3dhjtuhW_GsH2mXjGCl-QIlJ6b4ulOw/viewform?embedded=true" 
-                width="100%" 
-                height="967" 
-                frameBorder="0" 
-                marginHeight={0} 
-                marginWidth={0}
-                className="w-full"
-                title="Wedding RSVP Form"
-              >
-                Loading…
-              </iframe>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
         </div>
       </div>
 
@@ -92,11 +90,11 @@ export default function Scene11RSVP({ onNext, onPrev, isActive }: SceneProps) {
             transition={{
               duration: 8 + Math.random() * 4,
               repeat: Infinity,
-              ease: 'easeInOut',
+              ease: "easeInOut",
               delay: Math.random() * 3,
             }}
           >
-            {['✨', '🌟', '💫', '🤍', '💙', '🌸'][i]}
+            {["✨", "🌟", "💫", "🤍", "💙", "🌸"][i]}
           </motion.div>
         ))}
       </div>
