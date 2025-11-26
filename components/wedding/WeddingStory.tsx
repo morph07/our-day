@@ -217,10 +217,10 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
       console.log("Tap detected at:", tapX, "Screen width:", screenWidth);
       lastInteractionRef.current = now;
 
-      if (tapX < screenWidth * 0.3) {
+      if (tapX < screenWidth * 0.15) {
         console.log("Previous scene");
         prevScene(); // Left half - previous
-      } else if (tapX > screenWidth * 0.7) {
+      } else if (tapX > screenWidth * 0.85) {
         console.log("Next scene");
         nextScene(); // Right half - next
       }
@@ -242,9 +242,9 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
     lastInteractionRef.current = now;
 
-    if (clickX < screenWidth * 0.3) {
+    if (clickX < screenWidth * 0.15) {
       prevScene(); // Left half - previous
-    } else if (clickX > screenWidth * 0.7) {
+    } else if (clickX > screenWidth * 0.85) {
       nextScene(); // Right half - next
     }
   };
