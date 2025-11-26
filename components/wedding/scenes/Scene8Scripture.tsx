@@ -75,10 +75,11 @@ export default function Scene8Scripture({ isActive }: SceneProps) {
               transition={{ duration: 0.8, delay: 1.2 }}
             >
               <div className="w-24 h-px bg-white/50 mx-auto mb-4" />
-              <p className="text-sm font-serif font-medium text-white">
+              <p className="text-sm font-normal font-medium text-white">
                 Kapatid na Kirk Homer Ramos <br />
-                Lokal ng Pitpitan <br />
-                Distrito ng Bulacan West
+                <span className="text-xs font-thin">
+                  Lokal ng Pitpitan, Distrito ng Bulacan West
+                </span>
               </p>
             </motion.div>
           </motion.div>
