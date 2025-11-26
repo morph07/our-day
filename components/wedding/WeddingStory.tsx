@@ -17,10 +17,10 @@ import Scene10RSVP from "./scenes/Scene11RSVP";
 
 const scenes = [
   Scene1Envelope,
+  Scene7Scripture,
   Scene2Blessing,
   Scene3DateTheme,
   Scene6DressCode,
-  Scene7Scripture,
   Scene9Extras,
   Scene10RSVP,
 ];
@@ -79,7 +79,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
       () => {
         nextScene();
       },
-      currentScene === 4 ? 60000 : 30000
+      currentScene === 1 ? 60000 : 30000
     ); // 30 seconds per scene
 
     return () => clearTimeout(timer);
@@ -95,7 +95,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
 
     setProgress(0);
     const startTime = Date.now();
-    const duration = currentScene === 4 ? 60000 : 30000;
+    const duration = currentScene === 1 ? 60000 : 30000;
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
@@ -381,7 +381,7 @@ export default function WeddingStory({ onComplete }: WeddingStoryProps) {
       </AnimatePresence>
 
       {/* Navigation hints */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50 text-white/70 text-sm text-center">
+      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 z-50 text-white/70 text-sm text-center">
         <p className="font-body">
           Tap sides to navigate • Swipe to change scenes
         </p>

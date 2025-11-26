@@ -16,35 +16,27 @@
     "title": "Aouie and Elisha Wedding Invitation",
     "description": "Join us for our special day - 14 February 2026"
   },
-  "date": "2 February 2026",
-  "date_time_start": "2026-02-14T16:00:00Z",
-  "date_time_end": "2026-02-14T19:00:00Z",
+  "date": "13 February 2026",
+  "date_time_start": "2026-02-13T15:00:00Z",
+  "date_time_end": "2026-02-13T17:00:00Z",
   "location": {
     "church": "Iglesia Ni Cristo, Lokal ng Malolos",
-    "reception": "Vista Verde Garden Venue",
-    "address": "1234 Test Address St., Malolos, Bulacan"
+    "reception": "Lian Gwen Pavilion",
+    "address": "593 Diversion Rd Santa Isabel, Malolos, Bulacan"
   },
   "schedule": {
     "ceremony": {
-      "time": "4:00 PM",
-      "details": "Outdoor ceremony in the garden area."
+      "time": "3:00 PM",
+      "details": ""
     },
     "reception": {
-      "time": "6:00 PM",
-      "details": "Dinner and dancing in the main hall."
+      "time": "5:00 PM",
+      "details": ""
     }
   },
   "rsvp": {
-    "contact_name": "Aouie",
-    "contact_number": "0919 345 6789"
-  },
-  "accommodations": {
-    "hotel": {
-      "name": "Springfield Inn",
-      "address": "5678 Comfort St, Springfield, IL",
-      "phone": "(555) 123-4567",
-      "discount_code": "AOUWED2024"
-    }
+    "contact_name": "Elisha Marie Faustino",
+    "contact_number": "0966 194 7145"
   },
   "registry": {
     "link": "http://example.com/registry"

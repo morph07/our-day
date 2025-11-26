@@ -142,15 +142,18 @@ export default function Scene1Envelope({ onNext }: SceneProps) {
                   </div>
 
                   <motion.div
-                    className="mt-8 text-blue-900/60 text-sm font-bold"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    className="mt-8 text-blue-900/60 text-md font-bold"
+                    animate={{
+                      opacity: [0.5, 1, 0.5],
+                      color: ["#FFFFFF", "#3B82F6", "#1E3A8A"],
+                    }}
                     transition={{
                       duration: 2,
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
                   >
-                    Tap to open
+                    TAP TO OPEN
                   </motion.div>
                 </div>
               </div>

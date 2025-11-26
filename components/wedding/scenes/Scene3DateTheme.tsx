@@ -32,8 +32,8 @@ interface ScheduleItem {
 
 const scheduleItems: ScheduleItem[] = [
   {
-    time: "9:00 AM",
-    title: "CHURCH SERVICE",
+    time: "3:00 PM",
+    title: "Lokal ng Malolos",
     caption: "We gather before God to vow our forever",
     location: data.location.church,
     locationLink: "https://maps.app.goo.gl/4tDvWsuHimWgCDav5",
@@ -41,11 +41,11 @@ const scheduleItems: ScheduleItem[] = [
     color: "text-dusty-blue",
   },
   {
-    time: "11:00 AM",
-    title: "RECEPTION",
+    time: "5:00 PM",
+    title: "Lian Gwen Pavilion",
     caption: "Laughter, feasting, and celebration follow",
     location: data.location.reception,
-    locationLink: "https://maps.app.goo.gl/4tDvWsuHimWgCDav5",
+    locationLink: "https://maps.app.goo.gl/sazkXqppvN1Dp5N79",
     icon: <Users size={20} />,
     color: "text-green-500",
   },
@@ -150,15 +150,13 @@ END:VCALENDAR`;
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-8"
         >
-          <h2 className="typography-heading text-white mb-4">
-            The day the heavens will smile
-          </h2>
+          <h2 className="typography-heading text-white mb-4"></h2>
 
           {/* Date Card */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-dusty-blue/20 mb-6">
             <h1 className="typography-hero text-dusty-blue mb-1">Friday</h1>
             <div className="text-5xl font-decorative font-bold text-gray-800 mb-1">
-              2
+              13
             </div>
             <h2 className="typography-subheading text-gray-700 mb-1">
               February
@@ -184,7 +182,7 @@ END:VCALENDAR`;
                   {data.location.church}
                 </p>
                 <p className="text-sm text-white/80 font-medium">
-                  {data.location.address}
+                  {/* {data.location.address} */}
                 </p>
               </div>
             </div>
@@ -279,8 +277,8 @@ END:VCALENDAR`;
                       </h4>
 
                       {/* Location Pin for Church Service and Reception */}
-                      {(item.title === "CHURCH SERVICE" ||
-                        item.title === "RECEPTION") && (
+                      {(item.title === "Lokal ng Malolos" ||
+                        item.title === "Lian Gwen Pavilion") && (
                         <button
                           onClick={() =>
                             window.open(item.locationLink, "_blank")
@@ -333,7 +331,7 @@ END:VCALENDAR`;
                   href="tel:+26775950123"
                   className="text-white hover:text-white/80 transition-colors duration-200 font-medium"
                 >
-                  {data.rsvp.contact_name} {data.rsvp.contact_number}
+                  {data.rsvp.contact_name} <br /> {data.rsvp.contact_number}
                 </a>
               </div>
 
