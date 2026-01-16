@@ -22,6 +22,13 @@ export default function Scene10Extras({ isActive }: SceneProps) {
     // Static engagement photos
     const photos: PhotoItem[] = [
         {
+            id: "0",
+            src: "/images/journey/ENGAGEMENT.jpg",
+            alt: "Celebrating our engagement",
+            caption: "Celebrating our engagement...",
+            size: "large",
+        },
+        {
             id: "1",
             src: "/images/journey/IMG_1025.jpg",
             alt: "After proposal celebration",
